@@ -4,7 +4,8 @@
             <img src="../assets/logo.png" alt="logo">
         </div>
         <div class="header__nav">
-            <router-link to="/">Home</router-link>
+            <router-link to="/">Home</router-link> &nbsp;&nbsp;
+            <router-link to="/contact">Contact</router-link> &nbsp;&nbsp;
             <router-link to="/about">About</router-link>
         </div>
     </header>

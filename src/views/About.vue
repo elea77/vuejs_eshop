@@ -1,5 +1,19 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <TitlePage title="About"/>
+    <Button btnText="Clique sur moi"/>
   </div>
 </template>
+
+<script>
+  import TitlePage from "../components/TitlePage";
+  import Button from "../components/Button";
+
+  export default {
+    name: "About",
+    components: {
+      TitlePage,
+      Button
+    }
+  }
+</script>
