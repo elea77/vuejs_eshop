@@ -39,8 +39,8 @@
       {{ product.price }} €
     </div>
 
-    <button v-on:click="sayHello">say Hello</button>
-    <button @click="sayHello">say Hello</button>
+    <button v-on:click="sayHello('Eléa')">say Hello</button>
+    <button @click="sayHello('Eléa')">say Hello</button>
 
   </div>
 </template>
@@ -52,8 +52,8 @@ import HelloWorld from '@/components/HelloWorld.vue'
 export default {
   name: 'Home',
   methods: {
-    sayHello: function() {
-      alert('Hello');
+    sayHello: function(name) {
+      alert(`Hello ${name}`);
     }
   },
   data: function() {
