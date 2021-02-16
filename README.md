@@ -1,4 +1,4 @@
-# vuejs_eshop
+# Vue.js project Eshop
 
 ## Project setup
 ```
