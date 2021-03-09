@@ -20,7 +20,7 @@ export default {
     .title__page {
         margin: 40px 0px;
         h1 {
-            font-size: 20px;
+            font-size: 30px;
             letter-spacing: 2px;
             text-transform: uppercase;
             color: grey;
