@@ -1,18 +1,18 @@
 <template>
   <div class="page__product">
     <TitlePage title="Page produit"/>
-    <ProductItem :productObject="product"/>
+    <ProductCard :productObject="product"/>
   </div>
 </template>
 
 <script>
 import TitlePage from "../components/TitlePage";
-import ProductItem from "../components/ProductItem";
+import ProductCard from "../components/ProductCard";
 
 export default {
     components: {
         TitlePage,
-        ProductItem,
+        ProductCard,
     },
     data: function() {
       return {

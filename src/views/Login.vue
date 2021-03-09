@@ -21,13 +21,14 @@
         data: function() {
             return {
                 email: "",
-                password: ""
+                password: "",
+                userToken: ""
             }
         },
         methods: {
             login: function(event) {
                 event.preventDefault();
-               return fetch("http://localhost:3000/api/v1/login", {
+                return fetch("http://localhost:3000/api/v1/login", {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {
@@ -38,9 +39,10 @@
                 .then(res => res.json())
                 .then(data => {
                     console.log(data,"login data");
-                    }
-                )
-                .catch(err => console.log(err))
+                    console.log(data.token,"token");
+                })
+                .catch(err => console.log(err));
+                localStorage.setItem("token", this.userToken);
             }
         }
     }

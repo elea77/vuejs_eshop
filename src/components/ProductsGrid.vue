@@ -2,14 +2,14 @@
     <div class="products__grid">
         <div class="product__item" v-for="product in productsArray" :key="product._id">
             <router-link v-bind:to="'/product/' + product._id">
-                <ProductItem :productObject="product"/>
+                <ProductCard :productObject="product"/>
             </router-link>
         </div>
     </div>
 </template>
 
 <script>
-    import ProductItem from "../components/ProductItem";
+    import ProductCard from "../components/ProductCard";
 
     export default {
         name: "ProductsGrid",
@@ -19,7 +19,7 @@
             }
         },
         components: {
-            ProductItem
+            ProductCard
         }
     }
 
