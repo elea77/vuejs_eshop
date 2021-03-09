@@ -28,7 +28,7 @@
         methods: {
             login: function(event) {
                 event.preventDefault();
-                return fetch("http://localhost:3000/api/v1/login", {
+                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/login", {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {
