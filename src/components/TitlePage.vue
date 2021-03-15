@@ -9,8 +9,7 @@ export default {
     name: "TitlePage",
     props: {
         title: {
-            required: true,
-            type: String
+            required: true
         }
     }
 }

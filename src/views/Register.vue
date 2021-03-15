@@ -1,10 +1,16 @@
 <template>
     <div>
-        <TitlePage title="Page de connexion"/>
+        <TitlePage title="Page d'inscription"/>
         <div class="form">
             <!-- Autre méthode:  -->
             <!-- <form @submit.prevent="login"> -->
             <form>
+                <div class="form__group">
+                    <input type="text" v-model="firstName" id="" class="form_input" placeholder="Prénom"> <br>
+                </div>
+                <div class="form__group">
+                    <input type="text" v-model="lastName" id="" class="form_input" placeholder="Nom"> <br>
+                </div>
                 <div class="form__group">
                     <input type="text" v-model="email" id="" class="form_input" placeholder="Adresse mail"> <br>
                 </div>
@@ -12,7 +18,7 @@
                     <input type="password" v-model="password" id="" class="form_input" placeholder="Mot de passe"> <br>
                 </div>
                 <div class="form__group">
-                    <button type="submit" class="btn" @click="login">Se connecter</button>
+                    <button type="submit" class="btn" @click="login">S'inscrire</button>
                 </div>
             </form>
             <p v-if="messageError">{{ messageError }} </p>
@@ -29,6 +35,8 @@
         },
         data: function() {
             return {
+                firstName: "",
+                lastName: "",
                 email: "",
                 password: "",
                 userToken: "",
@@ -38,24 +46,19 @@
         methods: {
             login: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/login", {
+                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/users", {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {
+                        firstName: this.firstName,
+                        lastName: this.lastName,
                         email: this.email,
                         password: this.password
                     })
                 })
                 .then (res => res.json())
                 .then((data) => {
-                    if(!data.auth) {
-                        this.messageError = data.message;
-                    }
-                    else {
-                        let token = data.token;
-                        localStorage.setItem('token',token);
-                        this.$router.push('/account');
-                    }
+                    this.$router.push('/login');
                 })
                 .catch(err => console.log(err));
             }

@@ -9,7 +9,8 @@
             <router-link to="/about">About</router-link> |
             <router-link to="/shop">Shop</router-link> |
             <router-link to="/account">Mon compte</router-link> |
-            <router-link to="/login">Connexion</router-link>
+            <router-link to="/login">Connexion</router-link> |
+            <router-link to="/register">Inscription</router-link>
         </div>
     </header>
 </template>
