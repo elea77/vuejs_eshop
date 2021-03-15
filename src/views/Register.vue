@@ -58,7 +58,12 @@
                 })
                 .then (res => res.json())
                 .then((data) => {
-                    this.$router.push('/login');
+                    if(data.error) {
+                        console.log(data.error);
+                        this.messageError = data.error.details[0].message;
+                    } else {
+                        this.$router.push('/login');
+                    }
                 })
                 .catch(err => console.log(err));
             }

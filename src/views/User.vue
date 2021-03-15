@@ -12,6 +12,7 @@
         <div v-else>
             <p>Vous n'êtes pas connecté</p>
         </div>
+        <button>Modifier le profil</button>
     </div>
 </template>
 
