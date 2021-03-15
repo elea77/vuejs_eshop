@@ -8,21 +8,53 @@
             <router-link to="/contact">Contact</router-link> |
             <router-link to="/about">About</router-link> |
             <router-link to="/shop">Shop</router-link> |
-            <router-link to="/account">Mon compte</router-link> |
-            <router-link to="/login">Connexion</router-link> |
-            <router-link to="/register">Inscription</router-link>
+            <div v-if="isLogged">
+                <router-link to="/account">Mon compte</router-link> |
+                <button @click="logout">Se déconnecter</button>
+            </div>
+            <div v-else>
+                <router-link to="/login">Connexion</router-link> |
+                <router-link to="/register">Inscription</router-link>
+            </div>
         </div>
     </header>
 </template>
 
 <script>
-export default {
-    setup () {
-        
-
-        return {}
+import VueJwtDecode from "vue-jwt-decode";
+    export default {
+        components: {
+        },
+        data: function() {
+            return {
+                user:{},
+                isLogged:false
+            }
+        },
+        methods: {
+            logout: function() {
+                localStorage.removeItem('token');
+                this.isLogged = false;
+            }
+        },
+        created() {
+            const token = localStorage.getItem('token');
+            if(token) {
+               const decodedToken = VueJwtDecode.decode(token);
+               fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                   headers: {
+                       Authorization: token
+                   }
+               })
+               .then(res => res.json())
+               .then(data=>{
+                   this.isLogged = true;
+                   this.user = data;
+               })
+               .catch(err => console.log(err))
+            }
+        }
     }
-}
 </script>
 
 <style lang="scss" scoped>

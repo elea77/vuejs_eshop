@@ -18,6 +18,18 @@
                     <input type="password" v-model="password" id="" class="form_input" placeholder="Mot de passe"> <br>
                 </div>
                 <div class="form__group">
+                    <input type="text" v-model="phone" id="" class="form_input" placeholder="Numéro de téléphone"> <br>
+                </div>
+                <div class="form__group">
+                    <input type="text" v-model="address.zip" id="" class="form_input" placeholder="Adresse"> <br>
+                </div>
+                <div class="form__group">
+                    <input type="text" v-model="address.street" id="" class="form_input" placeholder="Code postal"> <br>
+                </div>
+                <div class="form__group">
+                    <input type="text" v-model="address.city" id="" class="form_input" placeholder="Ville"> <br>
+                </div>
+                <div class="form__group">
                     <button type="submit" class="btn" @click="login">S'inscrire</button>
                 </div>
             </form>
@@ -39,6 +51,9 @@
                 lastName: "",
                 email: "",
                 password: "",
+                phone: "",
+                isAdmin: false,
+                address: {},
                 userToken: "",
                 messageError: ""
             }
@@ -53,14 +68,21 @@
                         firstName: this.firstName,
                         lastName: this.lastName,
                         email: this.email,
-                        password: this.password
+                        password: this.password,
+                        isAdmin: false,
+                        phone: this.phone,
+                        address: {
+                            zip: this.address.zip,
+                            street: this.address.street,
+                            city: this.address.city,
+                        }
                     })
                 })
                 .then (res => res.json())
                 .then((data) => {
                     if(data.error) {
                         console.log(data.error);
-                        this.messageError = data.error.details[0].message;
+                        this.messageError = data.error;
                     } else {
                         this.$router.push('/login');
                     }

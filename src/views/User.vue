@@ -6,13 +6,15 @@
                 <p>Nom : {{user.firstName}}</p>
                 <p>Prénom : {{user.lastName}}</p>
                 <p>Email : {{user.email}}</p>
-                <button @click="logout">Se déconnecter</button>
+                <button id="update">Modifier le profil</button>
+                <div class="update-form">
+                    <input type="text" name="email" id="">
+                </div>
             </div>
         </div>
         <div v-else>
             <p>Vous n'êtes pas connecté</p>
         </div>
-        <button>Modifier le profil</button>
     </div>
 </template>
 
