@@ -2,7 +2,12 @@
   <div class="page__product">
     <div class="product__content" v-if="productItem">
       <TitlePage :title="productItem.title"/>
-      <p>{{productItem.price}}</p>
+      <!-- <ProductCard :productsArray="productsFromApi"/> -->
+
+      <p>{{productItem.price}} €</p>
+      <p>{{productItem.description}}</p>
+      <img :src="productItem.img" :alt="productItem.title">
+
     </div>
   </div>
 </template>

@@ -10,12 +10,6 @@
                     <input type="text" v-model="lastName" id="" class="form_input" placeholder="Nom"> <br>
                 </div>
                 <div class="form__group">
-                    <input type="text" v-model="email" id="" class="form_input" placeholder="Adresse mail"> <br>
-                </div>
-                <div class="form__group">
-                    <input type="password" v-model="password" id="" class="form_input" placeholder="Mot de passe"> <br>
-                </div>
-                <div class="form__group">
                     <input type="text" v-model="phone" id="" class="form_input" placeholder="Numéro de téléphone"> <br>
                 </div>
                 <div class="form__group">

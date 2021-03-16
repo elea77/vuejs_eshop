@@ -8,6 +8,7 @@
             <router-link to="/contact">Contact</router-link> |
             <router-link to="/about">About</router-link> |
             <router-link to="/shop">Shop</router-link> |
+            <router-link to="/cart">Mon panier</router-link> |
             <div v-if="isLogged">
                 <router-link to="/account">Mon compte</router-link> |
                 <button @click="logout">Se déconnecter</button>
