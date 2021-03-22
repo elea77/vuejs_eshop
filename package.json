@@ -13,7 +13,9 @@
     "vue": "^2.6.11",
     "vue-jwt-decode": "^0.1.0",
     "vue-router": "^3.2.0",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "serve-static": "^1.14.1",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
