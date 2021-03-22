@@ -18,18 +18,25 @@
                     <td>{{item.qty}}</td>
                     <td>{{item.price}} €</td>
                     <td>
-                        <button>-</button>
-                        <button>+</button>
+                        <button @click="removeQtyItemCart(item)">-</button>
+                        <button @click="addQtyItemCart(item)">+</button>
                     </td>
                     <td>
-                        {{ item.qty * item.price }} €
+                        {{ item.price * item.qty }} €
                     </td>
                     <td>
-                        <button>Supprimer du panier</button>
+                        <button @click="removeProductCart(item)">Supprimer du panier</button>
                     </td>
                 </tr>
             </tbody>
         </table> <br><br>
+        <div>
+            Quantité totale: {{ calcQty }}
+        </div>
+        <div>
+            Prix total: {{ calcTotal }} €
+        </div>
+
         <button @click="deleteCart()">Supprimer le panier</button>
 
     </div>
@@ -43,19 +50,41 @@ import TitlePage from "../components/TitlePage";
         components: {
             TitlePage
         },
-        methods: {
-            deleteCart: function() {
-                this.clearCart();
-            }
-        },
         mixins: [Cart],
         data: function() {
             return {
-                cartArray: []
+                cartArray: [],
+                // cartTotal: ""
             }
         },
         created() {
             this.cartArray = this.getCart();
+            // this.cartTotal = this.getCartTotal();
+        },
+        computed: {
+            calcQty: function(){
+                return this.getCartCount(this.cartArray);
+            },
+            calcTotal: function(){
+                return this.getCartTotal(this.cartArray);
+            }
+        },
+        methods: {
+            deleteCart: function() {
+                this.clearCart();
+            },
+            removeProductCart: function(product) {
+                this.removeItemCart(product);
+                this.cartArray = this.getCart();
+            },
+            addQtyItemCart: function(product) {
+                this.addOneQty(product);
+                this.cartArray = this.getCart();
+            },
+            removeQtyItemCart: function(product) {
+                this.removeOneQty(product);
+                this.cartArray = this.getCart();
+            }
         }
     }
 </script>

@@ -14,9 +14,9 @@ export default {
                 price: product.price,
                 qty: 1
             }
-            console.log(cart);
-            console.log(cart.includes(product._id));
-            // if(cart)
+            // console.log(cart);
+            // console.log(cart.includes(product._id));
+           
             let indexOfExistingProduct = cart.findIndex(
                 (el) => el.id === productObject.id
             )
@@ -34,36 +34,71 @@ export default {
             return JSON.parse(localStorage.getItem('cart'));
         },
         removeItemCart(product) {
-            // Récupérer le panier localStorage.getItem + parser
-            // Le modifier
-            // le réinsérer localStorage.setItem
 
-            let card = JSON.parse(localStorage.getItem('cart'));
-            const filterCard = card.filter((item) => {
+            let cart = JSON.parse(localStorage.getItem('cart'));
 
+            const filteredCart = cart.filter((item) => {
+                return item.id !== product.id;
             });
-            localStorage.setItem('cart', JSON.stringify(filteredCard));
+            localStorage.setItem('cart', JSON.stringify(filteredCart));
         },
         clearCart() {
             //localStorage.removeItem('cart');
             localStorage.removeItem('cart');
         },
         removeOneQty(product) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+
+            let productObject = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                qty: 1
+            }
+            let indexOfExistingProduct = cart.findIndex((el) => el.id === productObject.id );
+
+            if(indexOfExistingProduct != -1) {
+
+                if(cart[indexOfExistingProduct].qty > 1) {
+
+                    cart[indexOfExistingProduct].qty--;
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+
 
         },
         addOneQty(product) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+
+            let productObject = {
+                id: product.id,
+                title: product.title,
+                price: product.price,
+                qty: 1
+            }
+            let indexOfExistingProduct = cart.findIndex((el) => el.id === productObject.id );
+
+            if(indexOfExistingProduct != -1) {
+                cart[indexOfExistingProduct].qty++;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
 
         },
-        getCartTotal() {
-            // let cart = JSON.parse(localStorage.getItem('cart'));
-            
-            // const reducer = (price, qty) => price * qty;
+        getCartTotal(cart) {
 
-            // console.log(cart.reduce(reducer));
+            let total = cart.reduce(
+                (total, item) => total + (item.qty * item.price), 0
+            );
+            return total;
 
         },
-        getCartCount() {
-            //Array.Reduce
+        getCartCount(cart) {
+         
+            let total = cart.reduce(
+                (total, item) => total + item.qty, 0
+            );
+            return total;
         }
     }
 }

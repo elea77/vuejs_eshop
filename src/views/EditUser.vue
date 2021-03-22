@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TitlePage title="Page d'inscription"/>
+        <TitlePage title="Modification de profil"/>
         <div class="form">
             <form>
                 <div class="form__group">
@@ -25,7 +25,7 @@
                     <input type="text" v-model="address.country" id="" class="form_input" placeholder="Pays"> <br>
                 </div>
                 <div class="form__group">
-                    <button type="submit" class="btn" @click="login">S'inscrire</button>
+                    <button type="submit" class="btn" @click="login">Enregistrer les modifications</button>
                 </div>
             </form>
             <p v-if="messageError">{{ messageError }} </p>
