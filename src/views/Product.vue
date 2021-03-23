@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         getProduct: function() {
-            return fetch(`https://nodejs-myapi.herokuapp.com/api/v1/product/${this.$route.params.id}`)
+            return fetch(`http://localhost:3000/api/v1/product/${this.$route.params.id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data,"data");

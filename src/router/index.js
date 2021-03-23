@@ -9,6 +9,8 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import EditUser from '../views/EditUser.vue'
 import EditPassword from '../views/EditPassword.vue'
+import BOUsers from '../views/dashboard/Users.vue'
+import Dashboard from '../views/dashboard/Dashboard.vue'
 import auth from "../middleware/auth.js";
 import Cart from "../views/Cart.vue";
 
@@ -74,6 +76,16 @@ const routes = [
     path: '/edit_password',
     name: 'EditPassword',
     component: EditPassword
+  },
+  {
+    path: '/backoffice/users',
+    name: 'BOUsers',
+    component: BOUsers
+  },
+  {
+    path: '/backoffice',
+    name: 'Dashboard',
+    component: Dashboard
   },
   {
     path: '/about',

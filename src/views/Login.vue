@@ -38,7 +38,7 @@
         methods: {
             login: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/login", {
+                return fetch("http://localhost:3000/api/v1/login", {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {
@@ -55,6 +55,7 @@
                         let token = data.token;
                         localStorage.setItem('token',token);
                         this.$router.push('/account');
+                        window.location.reload();
                     }
                 })
                 .catch(err => console.log(err));

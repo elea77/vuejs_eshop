@@ -43,7 +43,7 @@
                     
                     if(this.password == this.repeat_password) {
                         const decodedToken = VueJwtDecode.decode(token);
-                        return fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                        return fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
                             method: "PUT",
                             headers: {
                                 Authorization: token,

@@ -38,13 +38,17 @@
         </div>
 
         <button @click="deleteCart()">Supprimer le panier</button>
+        <button @click="checkout()">Passer la commande</button>
 
     </div>
 </template>
 
 <script>
-import Cart from '../mixins/Cart'
-import TitlePage from "../components/TitlePage";
+    import Cart from '../mixins/Cart'
+    import TitlePage from "../components/TitlePage";
+    import { loadStripe } from '@stripe/stripe-js';
+    const stripePromise = loadStripe('pk_test_51IYAwmJ5UFJGtqNY47wrtVEcNKKVkbiO0TzfR5kQ9Sfle8LjCPvQXzhuWH7PKoRaWQNP3oC2mVBhHPqkUn3n4BId00YcpQNq2k');
+
 
     export default {
         components: {
@@ -84,6 +88,26 @@ import TitlePage from "../components/TitlePage";
             removeQtyItemCart: function(product) {
                 this.removeOneQty(product);
                 this.cartArray = this.getCart();
+            },
+            checkout: async function() {
+                const stripe = await stripePromise;
+                const response = await fetch('http://localhost:3000/api/v1/create-checkout-session',{
+                    method:"POST",
+                    headers : {
+                        "Content-type":"application/json"
+                    },
+                    body:JSON.stringify({
+                    amount:30000
+                    })
+                });
+                const session = await response.json();
+                const result = await stripe.redirectToCheckout({
+                    sessionId:session.id
+                });
+                console.log(result);
+                if(result.error) {
+                    console.log(result.error);
+                }
             }
         }
     }

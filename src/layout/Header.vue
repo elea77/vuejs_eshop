@@ -17,6 +17,11 @@
                 <router-link to="/login">Connexion</router-link> |
                 <router-link to="/register">Inscription</router-link>
             </div>
+            <div v-if="user.isAdmin == true">
+                <router-link to="/backoffice">Backoffice</router-link> 
+
+            </div>
+
         </div>
     </header>
 </template>
@@ -36,13 +41,14 @@ import VueJwtDecode from "vue-jwt-decode";
             logout: function() {
                 localStorage.removeItem('token');
                 this.isLogged = false;
+                window.location.reload();
             }
         },
         created() {
             const token = localStorage.getItem('token');
             if(token) {
                const decodedToken = VueJwtDecode.decode(token);
-               fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+               fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
                    headers: {
                        Authorization: token
                    }

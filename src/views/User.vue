@@ -41,7 +41,7 @@ import TitlePage from "../components/TitlePage";
             const token = localStorage.getItem('token');
             if(token) {
                 const decodedToken = VueJwtDecode.decode(token);
-                fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
                     headers: {
                         Authorization: token
                     }

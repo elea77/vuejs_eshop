@@ -1,38 +1,42 @@
 <template>
-    <div>
+    <div class="container">
         <TitlePage title="Page d'inscription"/>
-        <div class="form">
+        <div class="form-register">
             <form>
-                <div class="form__group">
-                    <input type="text" v-model="firstName" id="" class="form_input" placeholder="Prénom"> <br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" v-model="firstName" placeholder="Prénom">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" v-model="lastName" placeholder="Nom">
+                    </div>
                 </div>
-                <div class="form__group">
-                    <input type="text" v-model="lastName" id="" class="form_input" placeholder="Nom"> <br>
+                <div class="form-group">
+                    <input type="email" class="form-control" v-model="email" placeholder="Adresse mail">
                 </div>
-                <div class="form__group">
-                    <input type="text" v-model="email" id="" class="form_input" placeholder="Adresse mail"> <br>
+                <div class="form-group">
+                    <input type="password" class="form-control" v-model="password" placeholder="Mot de passe">
                 </div>
-                <div class="form__group">
-                    <input type="password" v-model="password" id="" class="form_input" placeholder="Mot de passe"> <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="phone" placeholder="Téléphone">
                 </div>
-                <div class="form__group">
-                    <input type="text" v-model="phone" id="" class="form_input" placeholder="Numéro de téléphone"> <br>
+                <div class="form-group">
+                    <input type="text" class="form-control" v-model="address.street" placeholder="Adresse">
                 </div>
-                <div class="form__group">
-                    <input type="text" v-model="address.street" id="" class="form_input" placeholder="Adresse"> <br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" v-model="address.city" placeholder="Ville">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="number" class="form-control" v-model="address.zip" placeholder="Code postal">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" v-model="address.country" placeholder="Pays">
+                    </div>
                 </div>
-                <div class="form__group">
-                    <input type="text" v-model="address.city" id="" class="form_input" placeholder="Ville"> <br>
-                </div>
-                <div class="form__group">
-                    <input type="text" v-model="address.zip" id="" class="form_input" placeholder="Code postal"> <br>
-                </div>
-                <div class="form__group">
-                    <input type="text" v-model="address.country" id="" class="form_input" placeholder="Pays"> <br>
-                </div>
-                <div class="form__group">
-                    <button type="submit" class="btn" @click="login">S'inscrire</button>
-                </div>
+                
+                <button type="submit" class="btn btn-primary" @click="login">S'inscrire</button>
+
             </form>
             <p v-if="messageError">{{ messageError }} </p>
         </div>
@@ -62,7 +66,7 @@
         methods: {
             login: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/users", {
+                return fetch("http://localhost:3000/api/v1/users", {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {
@@ -96,40 +100,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .form {
-        .form_input {
-            width: 40%;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            margin-bottom: 1rem;
-        }
-        .btn {
-            display: inline-block;
-            font-weight: 400;
-            color: #212529;
-            text-align: center;
-            vertical-align: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-color: transparent;
-            border: 1px solid transparent;
-            padding: .375rem .75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: .25rem;
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-    }
+    
 </style>
