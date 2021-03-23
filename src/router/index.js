@@ -8,6 +8,7 @@ import Product from '../views/Product.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import EditUser from '../views/EditUser.vue'
+import EditPassword from '../views/EditPassword.vue'
 import auth from "../middleware/auth.js";
 import Cart from "../views/Cart.vue";
 
@@ -68,6 +69,11 @@ const routes = [
     path: '/edit_profile',
     name: 'EditUser',
     component: EditUser
+  },
+  {
+    path: '/edit_password',
+    name: 'EditPassword',
+    component: EditPassword
   },
   {
     path: '/about',

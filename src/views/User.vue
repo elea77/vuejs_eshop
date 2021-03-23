@@ -8,7 +8,8 @@
                 <p>Email : {{user.email}}</p>
                 <p>Téléphone : {{user.phone}}</p>
                 <p>Adresse : {{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</p>
-                <router-link to="/edit_profile">Modifier le profil</router-link>
+                <router-link to="/edit_profile">Modifier le profil</router-link> | 
+                <router-link to="/edit_password">Modifier le mot de passe</router-link>
             </div>
         </div>
         <div v-else>
@@ -39,18 +40,18 @@ import TitlePage from "../components/TitlePage";
         created() {
             const token = localStorage.getItem('token');
             if(token) {
-               const decodedToken = VueJwtDecode.decode(token);
-               fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
-                   headers: {
-                       Authorization: token
-                   }
-               })
-               .then(res => res.json())
-               .then(data=>{
-                   this.isLogged = true;
-                   this.user = data;
-               })
-               .catch(err => console.log(err))
+                const decodedToken = VueJwtDecode.decode(token);
+                fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                    headers: {
+                        Authorization: token
+                    }
+                })
+                .then(res => res.json())
+                .then(data=>{
+                    this.isLogged = true;
+                    this.user = data;
+                })
+                .catch(err => console.log(err))
             }
         }
     }

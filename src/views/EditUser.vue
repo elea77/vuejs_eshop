@@ -4,7 +4,7 @@
         <div class="form">
             <form>
                 <div class="form__group">
-                    <input type="text" v-model="firstName" id="" class="form_input" placeholder="Prénom"> <br>
+                    <input type="text" v-model="firstName" id="" class="form_input" placeholder="Prénom" > <br>
                 </div>
                 <div class="form__group">
                     <input type="text" v-model="lastName" id="" class="form_input" placeholder="Nom"> <br>
@@ -25,7 +25,7 @@
                     <input type="text" v-model="address.country" id="" class="form_input" placeholder="Pays"> <br>
                 </div>
                 <div class="form__group">
-                    <button type="submit" class="btn" @click="login">Enregistrer les modifications</button>
+                    <button type="submit" class="btn" @click="edit">Enregistrer les modifications</button>
                 </div>
             </form>
             <p v-if="messageError">{{ messageError }} </p>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    import VueJwtDecode from "vue-jwt-decode";
     import TitlePage from "../components/TitlePage";
 
     export default {
@@ -42,48 +43,74 @@
         },
         data: function() {
             return {
-                firstName: "",
+                firstName:"",
                 lastName: "",
-                email: "",
-                password: "",
                 phone: "",
-                isAdmin: false,
                 address: {},
                 userToken: "",
                 messageError: ""
             }
         },
         methods: {
-            login: function(event) {
+            edit: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                return fetch("https://nodejs-myapi.herokuapp.com/api/v1/users", {
-                    method: "POST",
-                    headers: {"Content-Type":"Application/json"},
-                    body: JSON.stringify( {
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        email: this.email,
-                        password: this.password,
-                        isAdmin: false,
-                        phone: this.phone,
-                        address: {
-                            zip: this.address.zip,
-                            street: this.address.street,
-                            city: this.address.city,
-                            country: this.address.country,
+                const token = localStorage.getItem('token');
+                if(token) {
+                    const decodedToken = VueJwtDecode.decode(token);
+                    return fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                        method: "PUT",
+                        headers: {
+                            Authorization: token,
+                            "Content-Type":"Application/json"
+                        },
+                        body: JSON.stringify( {
+                            firstName: this.firstName,
+                            lastName: this.lastName,
+                            phone: this.phone,
+                            address: {
+                                zip: this.address.zip,
+                                street: this.address.street,
+                                city: this.address.city,
+                                country: this.address.country,
+                            }
+                        })
+                    })
+                    .then (res => res.json())
+                    .then((data) => {
+                        if(data.error) {
+                            console.log(data.error);
+                            this.messageError = data.error;
+                        } 
+                        else {
+                            this.$router.push('/account');
                         }
                     })
-                })
-                .then (res => res.json())
-                .then((data) => {
-                    if(data.error) {
-                        console.log(data.error);
-                        this.messageError = data.error;
-                    } else {
-                        this.$router.push('/login');
+                    .catch(err => console.log(err));
+                }
+            }
+        },
+        created() {
+            const token = localStorage.getItem('token');
+            if(token) {
+                const decodedToken = VueJwtDecode.decode(token);
+                fetch(`https://nodejs-myapi.herokuapp.com/api/v1/users/${decodedToken.id}`, {
+                    headers: {
+                        Authorization: token,
+                        "Content-Type":"Application/json"
                     }
                 })
-                .catch(err => console.log(err));
+                .then(res => res.json())
+                .then(data=>{
+                    this.isLogged = true;
+                    this.firstName = data.firstName;
+                    this.lastName = data.lastName;
+                    this.phone = data.phone;
+                    this.address.zip = data.address.zip;
+                    this.address.street= data.address.street;
+                    this.address.city= data.address.city;
+                    this.address.country= data.address.country;
+                })
+                .catch(err => console.log(err))
             }
         }
     }
