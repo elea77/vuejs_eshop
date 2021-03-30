@@ -10,8 +10,7 @@ export default {
             .then(res=>res.json())
         },
         getUser() {
-            const token = localStorage.getItem('token');
-            if(token) {
+                const token = localStorage.getItem('token');
                 const decodedToken = VueJwtDecode.decode(token);
                 return fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
                     headers: {
@@ -19,11 +18,9 @@ export default {
                     }
                 })
                 .then(res=>res.json())
-            }
         },
         editUser() {
-            const token = localStorage.getItem('token');
-            if(token) {
+                const token = localStorage.getItem('token');
                 const decodedToken = VueJwtDecode.decode(token);
                 return fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
                     method: "PUT",
@@ -44,7 +41,6 @@ export default {
                     })
                 })
                 .then (res => res.json())
-            }
         },
         deleteUser() {
         },
@@ -65,6 +61,17 @@ export default {
                         city: this.address.city,
                         country: this.address.country,
                     }
+                })
+            })
+            .then (res => res.json())
+        },
+        login() {
+            return fetch(`${apiConfigs.apiUrl}/login`, {
+                method: "POST",
+                headers: {"Content-Type":"Application/json"},
+                body: JSON.stringify( {
+                    email: this.email,
+                    password: this.password
                 })
             })
             .then (res => res.json())

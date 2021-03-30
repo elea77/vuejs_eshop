@@ -41,11 +41,14 @@ import ApiUsers from '../mixins/ApiUsers';
         mixins:[ApiUsers],
         created() {
             this.getUser()
-            .then(data=>{
-                this.isLogged = true;
-                this.user = data;
-            })
-            .catch((err) => console.log(err));
+                .then(data=>{
+                    const token = localStorage.getItem('token');
+                    if(token) {
+                        this.isLogged = true;
+                        this.user = data;
+                    }
+                })
+                .catch((err) => console.log(err));
         },
     }
 </script>

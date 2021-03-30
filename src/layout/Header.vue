@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import VueJwtDecode from "vue-jwt-decode";
-import apiConfigs from "../configs/api.configs";
+import ApiUsers from '../mixins/ApiUsers';
 
     export default {
         components: {
@@ -39,6 +38,7 @@ import apiConfigs from "../configs/api.configs";
                 isLogged:false
             }
         },
+        mixins:[ApiUsers],
         methods: {
             logout: function() {
                 localStorage.removeItem('token');
@@ -47,21 +47,15 @@ import apiConfigs from "../configs/api.configs";
             }
         },
         created() {
-            const token = localStorage.getItem('token');
-            if(token) {
-               const decodedToken = VueJwtDecode.decode(token);
-               fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
-                   headers: {
-                       Authorization: token
-                   }
-               })
-               .then(res => res.json())
+            this.getUser()
                .then(data=>{
-                   this.isLogged = true;
-                   this.user = data;
+                   const token = localStorage.getItem('token');
+                    if(token) {
+                        this.isLogged = true;
+                        this.user = data;
+                    }
                })
                .catch(err => console.log(err))
-            }
         }
     }
 </script>
