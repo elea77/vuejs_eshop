@@ -14,6 +14,7 @@
 
 <script>
 import TitlePage from "../components/TitlePage";
+import apiConfigs from "../configs/api.configs";
 
 export default {
     components: {
@@ -26,7 +27,7 @@ export default {
     },
     methods: {
         getProduct: function() {
-            return fetch(`http://localhost:3000/api/v1/product/${this.$route.params.id}`)
+            return fetch(`${apiConfigs.apiUrl}/product/${this.$route.params.id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data,"data");

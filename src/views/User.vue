@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import VueJwtDecode from "vue-jwt-decode";
 import TitlePage from "../components/TitlePage";
+import ApiUsers from '../mixins/ApiUsers';
+
     export default {
         components: {
             TitlePage
@@ -37,23 +38,15 @@ import TitlePage from "../components/TitlePage";
                 this.isLogged = false;
             }
         },
+        mixins:[ApiUsers],
         created() {
-            const token = localStorage.getItem('token');
-            if(token) {
-                const decodedToken = VueJwtDecode.decode(token);
-                fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
-                    headers: {
-                        Authorization: token
-                    }
-                })
-                .then(res => res.json())
-                .then(data=>{
-                    this.isLogged = true;
-                    this.user = data;
-                })
-                .catch(err => console.log(err))
-            }
-        }
+            this.getUser()
+            .then(data=>{
+                this.isLogged = true;
+                this.user = data;
+            })
+            .catch((err) => console.log(err));
+        },
     }
 </script>
 

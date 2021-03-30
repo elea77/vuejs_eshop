@@ -36,6 +36,7 @@
 <script>
     import VueJwtDecode from "vue-jwt-decode";
     import TitlePage from "../components/TitlePage";
+    import apiConfigs from "../configs/api.configs";
 
     export default {
         components: {
@@ -57,7 +58,7 @@
                 const token = localStorage.getItem('token');
                 if(token) {
                     const decodedToken = VueJwtDecode.decode(token);
-                    return fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
+                    return fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
                         method: "PUT",
                         headers: {
                             Authorization: token,
@@ -93,7 +94,7 @@
             const token = localStorage.getItem('token');
             if(token) {
                 const decodedToken = VueJwtDecode.decode(token);
-                fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
+                fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
                     headers: {
                         Authorization: token,
                         "Content-Type":"Application/json"

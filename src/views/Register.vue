@@ -45,6 +45,7 @@
 
 <script>
     import TitlePage from "../components/TitlePage";
+    import apiConfigs from "../configs/api.configs";
 
     export default {
         components: {
@@ -66,7 +67,7 @@
         methods: {
             login: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                return fetch("http://localhost:3000/api/v1/users", {
+                return fetch(`${apiConfigs.apiUrl}/users`, {
                     method: "POST",
                     headers: {"Content-Type":"Application/json"},
                     body: JSON.stringify( {

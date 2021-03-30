@@ -28,6 +28,8 @@
 
 <script>
 import VueJwtDecode from "vue-jwt-decode";
+import apiConfigs from "../configs/api.configs";
+
     export default {
         components: {
         },
@@ -48,7 +50,7 @@ import VueJwtDecode from "vue-jwt-decode";
             const token = localStorage.getItem('token');
             if(token) {
                const decodedToken = VueJwtDecode.decode(token);
-               fetch(`http://localhost:3000/api/v1/users/${decodedToken.id}`, {
+               fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
                    headers: {
                        Authorization: token
                    }

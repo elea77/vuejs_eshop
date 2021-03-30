@@ -10,6 +10,7 @@
             <th scope="col">Email</th>
             <th scope="col">Téléphone</th>
             <th scope="col">Adresse</th>
+            <th scope="col">Actions</th>
             </tr>
         </thead>
             <tbody>
@@ -18,7 +19,11 @@
                     <td>{{ user.lastName }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
-                    <td>{{ user.address.street }}, {{ user.address.city }} {{ user.address.zip }}, {{ user.address.country }}</td>                    
+                    <td>{{ user.address.street }}, {{ user.address.city }} {{ user.address.zip }}, {{ user.address.country }}</td> 
+                    <td>
+                      <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
+                      <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
+                    </td>                   
                 </tr>
             </tbody>
         </table>
