@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary" @click="login">S'inscrire</button>
+                <button type="submit" class="btn btn-primary" @click="register">S'inscrire</button>
 
             </form>
             <p v-if="messageError">{{ messageError }} </p>
@@ -45,7 +45,7 @@
 
 <script>
     import TitlePage from "../components/TitlePage";
-    import apiConfigs from "../configs/api.configs";
+    import ApiUsers from '../mixins/ApiUsers';
 
     export default {
         components: {
@@ -64,28 +64,11 @@
                 messageError: ""
             }
         },
+        mixins:[ApiUsers],
         methods: {
-            login: function(event) {
-                event.preventDefault(); // empêche le rechargement de la page
-                return fetch(`${apiConfigs.apiUrl}/users`, {
-                    method: "POST",
-                    headers: {"Content-Type":"Application/json"},
-                    body: JSON.stringify( {
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        email: this.email,
-                        password: this.password,
-                        isAdmin: false,
-                        phone: this.phone,
-                        address: {
-                            zip: this.address.zip,
-                            street: this.address.street,
-                            city: this.address.city,
-                            country: this.address.country,
-                        }
-                    })
-                })
-                .then (res => res.json())
+            register: function(event) {
+                event.preventDefault();
+                this.createUser()
                 .then((data) => {
                     if(data.error) {
                         console.log(data.error);

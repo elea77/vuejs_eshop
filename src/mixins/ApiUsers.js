@@ -47,6 +47,27 @@ export default {
             }
         },
         deleteUser() {
+        },
+        createUser() {
+            return fetch(`${apiConfigs.apiUrl}/users`, {
+                method: "POST",
+                headers: {"Content-Type":"Application/json"},
+                body: JSON.stringify( {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    password: this.password,
+                    isAdmin: false,
+                    phone: this.phone,
+                    address: {
+                        zip: this.address.zip,
+                        street: this.address.street,
+                        city: this.address.city,
+                        country: this.address.country,
+                    }
+                })
+            })
+            .then (res => res.json())
         }
     }
 } 
