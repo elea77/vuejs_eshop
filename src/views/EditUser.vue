@@ -34,9 +34,8 @@
 </template>
 
 <script>
-    import VueJwtDecode from "vue-jwt-decode";
     import TitlePage from "../components/TitlePage";
-    import apiConfigs from "../configs/api.configs";
+    import ApiUsers from '../mixins/ApiUsers';
 
     export default {
         components: {
@@ -52,68 +51,37 @@
                 messageError: ""
             }
         },
+        mixins:[ApiUsers],
         methods: {
             edit: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
-                const token = localStorage.getItem('token');
-                if(token) {
-                    const decodedToken = VueJwtDecode.decode(token);
-                    return fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
-                        method: "PUT",
-                        headers: {
-                            Authorization: token,
-                            "Content-Type":"Application/json"
-                        },
-                        body: JSON.stringify( {
-                            firstName: this.firstName,
-                            lastName: this.lastName,
-                            phone: this.phone,
-                            address: {
-                                zip: this.address.zip,
-                                street: this.address.street,
-                                city: this.address.city,
-                                country: this.address.country,
-                            }
-                        })
-                    })
-                    .then (res => res.json())
-                    .then((data) => {
-                        if(data.error) {
-                            console.log(data.error);
-                            this.messageError = data.error;
-                        } 
-                        else {
-                            this.$router.push('/account');
-                        }
-                    })
-                    .catch(err => console.log(err));
-                }
+                this.editUser()
+                .then((data) => {
+                    if(data.error) {
+                        console.log(data.error);
+                        this.messageError = data.error;
+                    } 
+                    else {
+                        this.$router.push('/account');
+                    }
+                })
+                .catch(err => console.log(err));
             }
         },
         created() {
-            const token = localStorage.getItem('token');
-            if(token) {
-                const decodedToken = VueJwtDecode.decode(token);
-                fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
-                    headers: {
-                        Authorization: token,
-                        "Content-Type":"Application/json"
-                    }
-                })
-                .then(res => res.json())
-                .then(data=>{
-                    this.isLogged = true;
-                    this.firstName = data.firstName;
-                    this.lastName = data.lastName;
-                    this.phone = data.phone;
-                    this.address.zip = data.address.zip;
-                    this.address.street= data.address.street;
-                    this.address.city= data.address.city;
-                    this.address.country= data.address.country;
-                })
-                .catch(err => console.log(err))
-            }
-        }
+            this.getUser()
+            .then(data=>{
+                this.isLogged = true;
+                this.firstName = data.firstName;
+                this.lastName = data.lastName;
+                this.phone = data.phone;
+                this.address.zip = data.address.zip;
+                this.address.street= data.address.street;
+                this.address.city= data.address.city;
+                this.address.country= data.address.country;
+            })
+            .catch((err) => console.log(err));
+        },
     }
 </script>
 
