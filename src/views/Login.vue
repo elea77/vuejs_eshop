@@ -12,7 +12,7 @@
                     <input type="password" v-model="password" id="" class="form_input" placeholder="Mot de passe"> <br>
                 </div>
                 <div class="form__group">
-                    <button type="submit" class="btn" @click="login">Se connecter</button>
+                    <button type="submit" class="btn" @click.prevent="loginBtn">Se connecter</button>
                 </div>
             </form>
             <p v-if="messageError">{{ messageError }} </p>
@@ -23,6 +23,7 @@
 <script>
     import TitlePage from "../components/TitlePage";
     import apiConfigs from "../configs/api.configs";
+    import ApiUsers from '../mixins/ApiUsers';
 
     export default {
         components: {
@@ -36,8 +37,9 @@
                 messageError: ""
             }
         },
+        mixins:[ApiUsers],
         methods: {
-            login: function(event) {
+            loginBtn: function() {
                 event.preventDefault(); // empêche le rechargement de la page
                 return fetch(`${apiConfigs.apiUrl}/login`, {
                     method: "POST",
@@ -48,6 +50,7 @@
                     })
                 })
                 .then (res => res.json())
+                // this.login()
                 .then((data) => {
                     if(!data.auth) {
                         this.messageError = data.message;

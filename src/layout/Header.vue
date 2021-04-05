@@ -35,7 +35,8 @@ import ApiUsers from '../mixins/ApiUsers';
         data: function() {
             return {
                 user:{},
-                isLogged:false
+                isLogged:false,
+                decodedToken: ""
             }
         },
         mixins:[ApiUsers],
@@ -43,19 +44,21 @@ import ApiUsers from '../mixins/ApiUsers';
             logout: function() {
                 localStorage.removeItem('token');
                 this.isLogged = false;
+                this.$router.push('/login');
                 window.location.reload();
+
             }
         },
         created() {
-            this.getUser()
-               .then(data=>{
-                   const token = localStorage.getItem('token');
-                    if(token) {
+            const token = localStorage.getItem('token');
+            if(token) {
+                this.getUser()
+                .then(data=>{
                         this.isLogged = true;
                         this.user = data;
-                    }
-               })
-               .catch(err => console.log(err))
+                })
+                .catch(err => console.log(err))
+            }
         }
     }
 </script>

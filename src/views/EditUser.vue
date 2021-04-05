@@ -36,7 +36,7 @@
 <script>
     import TitlePage from "../components/TitlePage";
     import ApiUsers from '../mixins/ApiUsers';
-
+    
     export default {
         components: {
             TitlePage
@@ -69,18 +69,22 @@
             }
         },
         created() {
-            this.getUser()
-            .then(data=>{
-                this.isLogged = true;
-                this.firstName = data.firstName;
-                this.lastName = data.lastName;
-                this.phone = data.phone;
-                this.address.zip = data.address.zip;
-                this.address.street= data.address.street;
-                this.address.city= data.address.city;
-                this.address.country= data.address.country;
+            const token = localStorage.getItem('token');
+            if(token) {
+                this.getUser()
+                .then(data=>{
+                    this.isLogged = true;
+                    this.firstName = data.firstName;
+                    this.lastName = data.lastName;
+                    this.phone = data.phone;
+                    this.address.zip = data.address.zip;
+                    this.address.street = data.address.street;
+                    this.address.city = data.address.city;
+                    this.address.country = data.address.country;
             })
             .catch((err) => console.log(err));
+            }
+            
         },
     }
 </script>

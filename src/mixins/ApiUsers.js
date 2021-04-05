@@ -43,6 +43,13 @@ export default {
                 .then (res => res.json())
         },
         deleteUser() {
+                // return fetch(`${apiConfigs.apiUrl}/users/${}`, {
+                //     method: "DELETE",
+                //     headers: {
+                //         "Content-Type":"Application/json"
+                //     }
+                // })
+                // .then (res => res.json())
         },
         createUser() {
             return fetch(`${apiConfigs.apiUrl}/users`, {

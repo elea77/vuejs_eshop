@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <TitlePage title="Liste utilisateurs" />
-
+    <button class="btn btn-primary mb-2">Ajouter un Administrateur</button>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -20,9 +20,14 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.phone }}</td>
                     <td>{{ user.address.street }}, {{ user.address.city }} {{ user.address.zip }}, {{ user.address.country }}</td> 
-                    <td>
-                      <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
-                      <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
+                    <td v-if="user.isAdmin == false">
+                      <!-- <button @click="edit" class="no-btn"> -->
+                        <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
+                      <!-- </button> -->
+                      <!-- <button @click="del(user.id)" class="no-btn"> -->
+                        <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
+                      <!-- </button> -->
+
                     </td>                   
                 </tr>
             </tbody>
@@ -47,6 +52,19 @@
       };
     },
     mixins:[ApiUsers],
+    methods: {
+            // edit: function(event) {
+            //   console.log("test");
+            // },
+            // del: function(user_id) {
+            //   console.log(user_id);
+              // this.deleteUser(user_id)
+              // .then(data => {
+              //       console.log("check");
+              // })
+              // .catch((err) => console.log(err));
+            // }
+        },
     created() {
       this.getUsers()
         .then((data) => {
@@ -57,4 +75,10 @@
   };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .no-btn {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+  }
+</style>
