@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         getProduct: function() {
-            return fetch(`${apiConfigs.apiUrl}/product/${this.$route.params.id}`)
+            return fetch(`${apiConfigs.apiUrl}/products/${this.$route.params.id}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data,"data");
