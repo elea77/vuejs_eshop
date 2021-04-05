@@ -28,11 +28,6 @@
         searchValue: ""
       };
     },
-    // methods: {
-    //   search: function() {
-    //     console.log(this.searchValue);
-    //   }
-    // },
     computed: {
       filteredShop: function() {
         let filter = new RegExp(this.searchValue, "i");

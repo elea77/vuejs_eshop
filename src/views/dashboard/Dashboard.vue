@@ -2,7 +2,6 @@
   <div class="">
     <TitlePage title="Dashboard" />
 
-    <router-link to="/backoffice/users">Liste utilisateurs</router-link> 
         <div class="panel">
 
             <div class="top">
@@ -19,37 +18,23 @@
                 </div>
 
                 <div class="tab">
-                    <a href="addImageInfo.php">
+                    <router-link to="/backoffice/users">
                     <span class="iconify" data-inline="false" data-icon="ic:outline-note-add" style="color: white; font-size: 24px;"></span>
-                        <h5>Ajouter</h5>
-                    </a>
+                        <h5>Liste des utilisateurs</h5>
+                    </router-link> 
                 </div>
 
                 <div class="tab">
-                    <a href="ambianceCat.php">
+                    <router-link to="/backoffice/products">
                         <span class="iconify" data-inline="false" data-icon="openmoji:picture" style="font-size: 24px;"></span>
-                        <h5>Photos ambiances</h5>
-                    </a>
-                </div>
-
-                <div class="tab">
-                    <a href="productCat.php">
-                        <span class="iconify" data-inline="false" data-icon="flat-color-icons:picture" style="font-size: 24px;"></span>
-                        <h5>Photos produits</h5>
-                    </a>
+                        <h5>Liste des produits</h5>
+                    </router-link> 
                 </div>
 
                 <div class="tab">
                     <a href="login.php?action=deconnexion">
                         <span class="iconify" data-inline="false" data-icon="fe:logout" style="font-size: 24px;"></span>
                         <h5>Se déconnecter</h5>
-                    </a>
-                </div>
-
-                <div class="tab-home">
-                    <a href="index.php">
-                        <span class="iconify" data-inline="false" data-icon="mdi-light:home" style="font-size: 26px; color: white;"></span>
-                        <h5>Accueil</h5>
                     </a>
                 </div>
 
