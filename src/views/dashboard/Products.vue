@@ -21,8 +21,11 @@
                     <td>{{ product.description }}</td>
                     <td><img :src="product.img" :alt="product.title" width="20%"></td>
                     <td>
-                      <!-- <button @click="edit" class="no-btn"> -->
+                      <router-link :to="{name:'EditProduct',params:{id:product._id}}">
                         <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
+                      </router-link>
+                      <!-- <button @click="edit" class="no-btn"> -->
+                        <!-- <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span> -->
                       <!-- </button> -->
                       <!-- <button @click="del(user.id)" class="no-btn"> -->
                         <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>

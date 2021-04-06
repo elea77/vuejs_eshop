@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <TitlePage title="Page d'inscription"/>
-        <div class="form-register">
+        <div class="form">
             <form>
                 <div class="form-row">
                     <div class="form-group col-md-8">

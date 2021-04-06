@@ -12,22 +12,16 @@ export default {
             .then(res => res.json())
         },
         editProduct() {
-            return fetch(`${apiConfigs.apiUrl}/products/${id}`, {
+            return fetch(`${apiConfigs.apiUrl}/products/${this.$route.params.id}`, {
                 method: "PUT",
                 headers: {
-                    Authorization: token,
                     "Content-Type":"Application/json"
                 },
                 body: JSON.stringify( {
-                    firstName: this.firstName,
-                    lastName: this.lastName,
-                    phone: this.phone,
-                    address: {
-                        zip: this.address.zip,
-                        street: this.address.street,
-                        city: this.address.city,
-                        country: this.address.country,
-                    }
+                    title: this.title,
+                    price: this.price,
+                    description: this.description,
+                    img: this.img
                 })
             })
             .then (res => res.json())
@@ -42,6 +36,15 @@ export default {
                     price: this.price,
                     img: this.img
                 })
+            })
+            .then (res => res.json())
+        },
+        deleteProduct() {
+            return fetch(`${apiConfigs.apiUrl}/products/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type":"Application/json"
+                }
             })
             .then (res => res.json())
         }
