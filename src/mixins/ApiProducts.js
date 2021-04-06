@@ -32,5 +32,18 @@ export default {
             })
             .then (res => res.json())
         },
+        createProduct() {
+            return fetch(`${apiConfigs.apiUrl}/products`, {
+                method: "POST",
+                headers: {"Content-Type":"Application/json"},
+                body: JSON.stringify( {
+                    title: this.title,
+                    description: this.description,
+                    price: this.price,
+                    img: this.img
+                })
+            })
+            .then (res => res.json())
+        }
     }
 } 

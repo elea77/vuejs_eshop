@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TitlePage title="Modification de profil"/>
+        <TitlePage title="Modification de user"/>
         <div class="form">
             <form>
                 <div class="form__group">
@@ -34,8 +34,8 @@
 </template>
 
 <script>
-    import TitlePage from "../components/TitlePage";
-    import ApiUsers from '../mixins/ApiUsers';
+    import TitlePage from '../../components/TitlePage'; 
+    import ApiUsers from '../../mixins/ApiUsers';
     
     export default {
         components: {
@@ -66,7 +66,7 @@
                     }
                 })
                 .catch(err => console.log(err));
-            }
+            }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         },
         created() {
             const token = localStorage.getItem('token');

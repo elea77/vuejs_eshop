@@ -19,7 +19,7 @@ export default {
                 })
                 .then(res=>res.json())
         },
-        editUser() {
+        editProfile() {
                 const token = localStorage.getItem('token');
                 const decodedToken = VueJwtDecode.decode(token);
                 return fetch(`${apiConfigs.apiUrl}/users/${decodedToken.id}`, {
@@ -103,6 +103,28 @@ export default {
                 })
             })
             .then (res => res.json())
-        }
+        },
+        editUser() {
+            const token = localStorage.getItem('token');
+            return fetch(`${apiConfigs.apiUrl}/users/${this.$route.params.id}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: token,
+                    "Content-Type":"Application/json"
+                },
+                body: JSON.stringify( {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    phone: this.phone,
+                    address: {
+                        zip: this.address.zip,
+                        street: this.address.street,
+                        city: this.address.city,
+                        country: this.address.country,
+                    }
+                })
+            })
+            .then (res => res.json())
+        },
     }
 } 

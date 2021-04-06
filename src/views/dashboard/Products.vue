@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <TitlePage title="Liste des produits" />
-    <button class="btn btn-primary mb-2">Ajouter un Administrateur</button>
+    <router-link to="/backoffice/add/product">
+      <button class="btn btn-primary mb-2">Ajouter un produit</button>
+    </router-link>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -9,6 +11,7 @@
             <th scope="col">Prix</th>
             <th scope="col">Description</th>
             <th scope="col">Image</th>
+            <th scope="col">Actions</th>
             </tr>
         </thead>
             <tbody>
@@ -16,8 +19,16 @@
                     <td>{{ product.title }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.description }}</td>
-                    <td>{{ product.img }}</td>
-                          
+                    <td><img :src="product.img" :alt="product.title" width="20%"></td>
+                    <td>
+                      <!-- <button @click="edit" class="no-btn"> -->
+                        <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
+                      <!-- </button> -->
+                      <!-- <button @click="del(user.id)" class="no-btn"> -->
+                        <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
+                      <!-- </button> -->
+
+                    </td> 
                 </tr>
             </tbody>
         </table>
