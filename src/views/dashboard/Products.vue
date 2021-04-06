@@ -53,15 +53,15 @@
     },
     mixins:[ApiProducts],
     methods: {
-            del: function(id) {
-              console.log(id);
-              this.deleteProduct(id)
-              .then(data => {
-                window.location.reload();
-              })
-              .catch((err) => console.log(err));
-            }
-        },
+      del: function(id) {
+        console.log(id);
+        this.deleteProduct(id)
+        .then(data => {
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+      }
+    },
     created() {
       this.getProducts()
         .then((data) => {

@@ -7,7 +7,7 @@ import User from '../views/User.vue'
 import Product from '../views/Product.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import EditProfile from '../views/EditProfile.vue'
+import EditUser from '../views/EditUser.vue'
 import EditPassword from '../views/EditPassword.vue'
 import BOUsers from '../views/dashboard/Users.vue'
 import BOProducts from '../views/dashboard/Products.vue'
@@ -15,7 +15,6 @@ import Dashboard from '../views/dashboard/Dashboard.vue'
 import AddAdmin from '../views/dashboard/AddAdmin.vue'
 import AddProduct from '../views/dashboard/AddProduct.vue'
 import EditProduct from '../views/dashboard/EditProduct.vue'
-import EditUser from '../views/dashboard/EditUser.vue'
 import auth from "../middleware/auth.js";
 import Cart from "../views/Cart.vue";
 
@@ -74,8 +73,8 @@ const routes = [
   },
   {
     path: '/edit_profile',
-    name: 'EditProfile',
-    component: EditProfile
+    name: 'EditUser',
+    component: EditUser
   },
   {
     path: '/edit_password',
@@ -111,11 +110,6 @@ const routes = [
     path: '/backoffice/edit_product/:id',
     name: 'EditProduct',
     component: EditProduct
-  },
-  {
-    path: '/backoffice/edit_user/:id',
-    name: 'EditUser',
-    component: EditUser
   },
   {
     path: '/about',

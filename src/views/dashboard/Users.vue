@@ -23,13 +23,9 @@
                     <td>{{ user.phone }}</td>
                     <td>{{ user.address.street }}, {{ user.address.city }} {{ user.address.zip }}, {{ user.address.country }}</td> 
                     <td v-if="user.isAdmin == false">
-                      <router-link :to="{name:'EditUser',params:{id:user._id}}">
-                        <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
-                      </router-link>
-                      <!-- <button @click="del(user.id)" class="no-btn"> -->
+                      <button @click="del(user._id)" class="no-btn">
                         <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
-                      <!-- </button> -->
-
+                      </button>
                     </td>                   
                 </tr>
             </tbody>
@@ -55,17 +51,15 @@
     },
     mixins:[ApiUsers],
     methods: {
-            // edit: function(event) {
-            //   console.log("test");
-            // },
-            // del: function() {
-            //   this.deleteUser()
-            //   .then(data => {
-            //         console.log("check");
-            //   })
-            //   .catch((err) => console.log(err));
-            // }
-        },
+      del: function(id) {
+        console.log(id);
+        this.deleteUser(id)
+        .then(data => {
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+      }
+    },
     created() {
       this.getUsers()
         .then((data) => {
