@@ -39,7 +39,7 @@ export default {
             })
             .then (res => res.json())
         },
-        deleteProduct() {
+        deleteProduct(id) {
             return fetch(`${apiConfigs.apiUrl}/products/${id}`, {
                 method: "DELETE",
                 headers: {

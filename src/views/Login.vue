@@ -39,7 +39,7 @@
         },
         mixins:[ApiUsers],
         methods: {
-            loginBtn: function() {
+            loginBtn: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
                 return fetch(`${apiConfigs.apiUrl}/login`, {
                     method: "POST",

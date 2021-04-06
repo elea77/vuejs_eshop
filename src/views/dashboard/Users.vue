@@ -23,9 +23,9 @@
                     <td>{{ user.phone }}</td>
                     <td>{{ user.address.street }}, {{ user.address.city }} {{ user.address.zip }}, {{ user.address.country }}</td> 
                     <td v-if="user.isAdmin == false">
-                      <!-- <button @click="edit" class="no-btn"> -->
+                      <router-link :to="{name:'EditUser',params:{id:user._id}}">
                         <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
-                      <!-- </button> -->
+                      </router-link>
                       <!-- <button @click="del(user.id)" class="no-btn"> -->
                         <span class="iconify" data-inline="false" data-icon="fluent:delete-dismiss-28-filled" style="font-size: 28px; color: #CA1C46; "></span>
                       <!-- </button> -->
@@ -58,13 +58,12 @@
             // edit: function(event) {
             //   console.log("test");
             // },
-            // del: function(user_id) {
-            //   console.log(user_id);
-              // this.deleteUser(user_id)
-              // .then(data => {
-              //       console.log("check");
-              // })
-              // .catch((err) => console.log(err));
+            // del: function() {
+            //   this.deleteUser()
+            //   .then(data => {
+            //         console.log("check");
+            //   })
+            //   .catch((err) => console.log(err));
             // }
         },
     created() {
