@@ -17,6 +17,7 @@ import AddProduct from '../views/dashboard/AddProduct.vue'
 import EditProduct from '../views/dashboard/EditProduct.vue'
 import auth from "../middleware/auth.js";
 import Cart from "../views/Cart.vue";
+import Whitelist from "../views/Whitelist.vue";
 
 Vue.use(VueRouter)
 
@@ -55,6 +56,11 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/whitelist',
+    name: 'Whitelist',
+    component: Whitelist
   },
   {
     path: '/product/:id',

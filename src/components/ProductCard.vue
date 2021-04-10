@@ -10,25 +10,42 @@
         </p>
         <p>
             <button @click="addItemToCart(productObject)">Ajouter au panier</button>
+
+            <button @click="addItemToWL(productObject)"><i class="far fa-star"></i></button>
         </p>
+        
 
     </div>
 </template>
 
 <script>
     import Cart from "../mixins/Cart";
+    import Whitelist from "../mixins/Whitelist";
 
     export default {
         name: "ProductsGrid",
-        mixins:[Cart],
+        mixins: [Cart, Whitelist],
         props: {
             productObject: {
                 type: Object
             }
         },
+        data: function() {
+            return {
+                whitelistArray: [],
+                whitelistExisting: false
+            }
+        },
+        created() {
+            this.whitelistArray = this.getWL();
+        },
         methods: {
             addItemToCart: function(product) {
                 this.addToCart(product);
+                console.log(product);
+            },
+            addItemToWL: function(product) {
+                this.addToWL(product);
             }
         }
     }

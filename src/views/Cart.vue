@@ -1,44 +1,49 @@
 <template>
     <div class="shopping__cart">
         <TitlePage title="Panier"/>
-        <table>
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Quantité</th>
-                    <th>Prix</th>
-                    <th></th>
-                    <th>Total</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in cartArray" v-bind:key="item._id">
-                    <td>{{item.title}}</td>
-                    <td>{{item.qty}}</td>
-                    <td>{{item.price}} €</td>
-                    <td>
-                        <button @click="removeQtyItemCart(item)">-</button>
-                        <button @click="addQtyItemCart(item)">+</button>
-                    </td>
-                    <td>
-                        {{ item.price * item.qty }} €
-                    </td>
-                    <td>
-                        <button @click="removeProductCart(item)">Supprimer du panier</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table> <br><br>
-        <div>
-            Quantité totale: {{ calcQty }}
-        </div>
-        <div>
-            Prix total: {{ calcTotal }} €
-        </div>
+        <div v-if="cartArray">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                        <th></th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in cartArray" v-bind:key="item._id">
+                        <td>{{item.title}}</td>
+                        <td>{{item.qty}}</td>
+                        <td>{{item.price}} €</td>
+                        <td>
+                            <button @click="removeQtyItemCart(item)">-</button>
+                            <button @click="addQtyItemCart(item)">+</button>
+                        </td>
+                        <td>
+                            {{ item.price * item.qty }} €
+                        </td>
+                        <td>
+                            <button @click="removeProductCart(item)">Supprimer du panier</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> <br><br>
+            <div>
+                Quantité totale: {{ calcQty }}
+            </div>
+            <div>
+                Prix total: {{ calcTotal }} €
+            </div>
 
-        <button @click="deleteCart()">Supprimer le panier</button>
-        <button @click="checkout()">Passer la commande</button>
+            <button @click="deleteCart()">Supprimer le panier</button>
+            <button @click="checkout()">Passer la commande</button>
+        </div>
+        <div v-else>
+            <h5>Votre panier est vide</h5>
+        </div>
 
     </div>
 </template>
@@ -58,8 +63,7 @@
         mixins: [Cart],
         data: function() {
             return {
-                cartArray: [],
-                // cartTotal: ""
+                cartArray: []
             }
         },
         created() {
@@ -77,6 +81,7 @@
         methods: {
             deleteCart: function() {
                 this.clearCart();
+                window.location.reload();
             },
             removeProductCart: function(product) {
                 this.removeItemCart(product);
