@@ -50,20 +50,26 @@
 
 <script>
     import Cart from '../mixins/Cart'
+    import ApiUsers from '../mixins/ApiUsers'
     import TitlePage from "../components/TitlePage";
     import { loadStripe } from '@stripe/stripe-js';
     import apiConfigs from "../configs/api.configs";
     const stripePromise = loadStripe('pk_test_51IYAwmJ5UFJGtqNY47wrtVEcNKKVkbiO0TzfR5kQ9Sfle8LjCPvQXzhuWH7PKoRaWQNP3oC2mVBhHPqkUn3n4BId00YcpQNq2k');
+    import VueJwtDecode from "vue-jwt-decode";
 
 
     export default {
         components: {
             TitlePage
         },
-        mixins: [Cart],
+        mixins: [Cart, ApiUsers],
         data: function() {
             return {
-                cartArray: []
+                cartArray: [],
+                total: 0,
+                status: "",
+                user: "",
+                products: []
             }
         },
         created() {
@@ -96,6 +102,7 @@
                 this.cartArray = this.getCart();
             },
             checkout: async function() {
+                this.order();
                 const stripe = await stripePromise;
                 const response = await fetch(`${apiConfigs.apiUrl}/create-checkout-session`,{
                     method:"POST",
@@ -103,7 +110,7 @@
                         "Content-type":"application/json"
                     },
                     body:JSON.stringify({
-                    amount:30000
+                        amount: this.calcTotal * 100
                     })
                 });
                 const session = await response.json();
@@ -114,6 +121,34 @@
                 if(result.error) {
                     console.log(result.error);
                 }
+                
+            },
+            order: function() {
+                const token = localStorage.getItem('token');
+                const decodedToken = VueJwtDecode.decode(token);
+
+                this.cartArray.forEach(item => {
+                    this.products.push(item.id)
+                });
+
+                return fetch(`${apiConfigs.apiUrl}/orders`, {
+                    method: "POST",
+                    headers: {"Content-Type":"Application/json"},
+                    body: JSON.stringify( {
+                        total: this.calcTotal,
+                        status: "En cours",
+                        user: decodedToken.id,
+                        products: this.products
+                    })
+                })
+                .then (res => res.json())
+                .then((data) => {
+                    if(data.error) {
+                        console.log(data.error);
+                        this.messageError = data.error;
+                    }
+                })
+                .catch(err => console.log(err));
             }
         }
     }
