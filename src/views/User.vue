@@ -2,14 +2,26 @@
     <div>
         <TitlePage title="Mon compte"/>
         <div v-if="isLogged">
-            <div class="user__info" v-if="user">
-                <p>Nom : {{user.firstName}}</p>
-                <p>Prénom : {{user.lastName}}</p>
-                <p>Email : {{user.email}}</p>
-                <p>Téléphone : {{user.phone}}</p>
-                <p>Adresse : {{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</p>
-                <router-link to="/edit_profile">Modifier le profil</router-link> | 
-                <router-link to="/edit_password">Modifier le mot de passe</router-link>
+            <div class="user__info row" v-if="user">
+                <div class="col-6">
+                    <h4>Mes informations personnelles</h4>
+                    <p>Nom : {{user.firstName}}</p>
+                    <p>Prénom : {{user.lastName}}</p>
+                    <p>Email : {{user.email}}</p>
+                    <p>Téléphone : {{user.phone}}</p>
+                    <p>Adresse : {{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</p>
+                    <router-link to="/edit_profile">Modifier le profil</router-link> 
+                    <!-- | <router-link to="/edit_password">Modifier le mot de passe</router-link> -->
+                </div>
+                <div class="col-6">
+                    <h4>Mes commandes</h4>
+                    <div v-for="order in this.ordersArray" v-bind:key="order._id">
+                        
+                        <p><b>8 avril 2021</b> | {{ order.status }} | {{ order.total }} €</p>
+                        
+                    </div>
+                </div>
+                
             </div>
         </div>
         <div v-else>
@@ -19,8 +31,9 @@
 </template>
 
 <script>
-import TitlePage from "../components/TitlePage";
-import ApiUsers from '../mixins/ApiUsers';
+    import TitlePage from "../components/TitlePage";
+    import ApiUsers from '../mixins/ApiUsers';
+    import ApiOrders from '../mixins/ApiOrders';
 
     export default {
         components: {
@@ -29,7 +42,9 @@ import ApiUsers from '../mixins/ApiUsers';
         data: function() {
             return {
                 user:{},
-                isLogged:false
+                isLogged:false,
+                orders: [],
+                ordersArray: []
             }
         },
         methods: {
@@ -38,7 +53,7 @@ import ApiUsers from '../mixins/ApiUsers';
                 this.isLogged = false;
             }
         },
-        mixins:[ApiUsers],
+        mixins:[ApiUsers, ApiOrders],
         created() {
             const token = localStorage.getItem('token');
             if(token) {
@@ -46,10 +61,25 @@ import ApiUsers from '../mixins/ApiUsers';
                 .then(data=>{
                     this.isLogged = true;
                     this.user = data;
+                    this.orders = this.user.orders;
+                    
+                    this.orders.forEach(id => {
+                        console.log("id", id);
+
+                        this.getOrder(id)
+                        .then(data=>{
+                            this.ordersArray.push(data)
+                        })
+                        .catch(err => console.log(err))
+                    });
+                    
+                    // console.log("orders", this.orders);
+
+                    
                 })
                 .catch(err => console.log(err))
             }
-        },
+        }
     }
 </script>
 
