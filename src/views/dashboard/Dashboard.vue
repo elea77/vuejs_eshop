@@ -32,6 +32,13 @@
                 </div>
 
                 <div class="tab">
+                    <router-link to="/backoffice/orders">
+                        <span class="iconify" data-inline="false" data-icon="openmoji:picture" style="font-size: 24px;"></span>
+                        <h5>Commandes</h5>
+                    </router-link> 
+                </div>
+
+                <div class="tab">
                     <a href="login.php?action=deconnexion">
                         <span class="iconify" data-inline="false" data-icon="fe:logout" style="font-size: 24px;"></span>
                         <h5>Se déconnecter</h5>

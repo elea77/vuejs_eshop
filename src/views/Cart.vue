@@ -37,9 +37,9 @@
             <div>
                 Prix total: {{ calcTotal }} €
             </div>
-
             <button @click="deleteCart()">Supprimer le panier</button>
-            <button @click="checkout()">Passer la commande</button>
+            
+            <button @click="checkout()" v-if="isLogged">Passer la commande</button>
         </div>
         <div v-else>
             <h5>Votre panier est vide</h5>
@@ -67,6 +67,7 @@
             return {
                 cartArray: [],
                 total: 0,
+                isLogged: false,
                 status: "",
                 user: "",
                 products: []
@@ -74,7 +75,10 @@
         },
         created() {
             this.cartArray = this.getCart();
-            // this.cartTotal = this.getCartTotal();
+            const token = localStorage.getItem('token');
+            if(token) {
+                this.isLogged = true;
+            }
         },
         computed: {
             calcQty: function(){
@@ -117,7 +121,6 @@
                 const result = await stripe.redirectToCheckout({
                     sessionId:session.id
                 });
-                console.log(result);
                 if(result.error) {
                     console.log(result.error);
                 }
