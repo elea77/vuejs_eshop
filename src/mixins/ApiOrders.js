@@ -38,7 +38,7 @@ export default {
                 method: "POST",
                 headers: {"Content-Type":"Application/json"},
                 body: JSON.stringify( {
-                    total: this.calcTotal,
+                    total: this.calcTotal + 4.90,
                     status: "En cours",
                     date: orderDate,
                     user: decodedToken.id,

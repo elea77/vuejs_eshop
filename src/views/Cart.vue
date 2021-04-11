@@ -1,16 +1,15 @@
 <template>
-    <div class="shopping__cart">
+    <div class="shopping__cart container">
         <TitlePage title="Panier"/>
         <div v-if="cartArray">
-            <table>
-                <thead>
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th>Titre</th>
-                        <th>Quantité</th>
-                        <th>Prix</th>
-                        <th></th>
-                        <th>Total</th>
-                        <th></th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,14 +18,12 @@
                         <td>{{item.qty}}</td>
                         <td>{{item.price}} €</td>
                         <td>
-                            <button @click="removeQtyItemCart(item)">-</button>
-                            <button @click="addQtyItemCart(item)">+</button>
-                        </td>
-                        <td>
                             {{ item.price * item.qty }} €
                         </td>
                         <td>
-                            <button @click="removeProductCart(item)">Supprimer du panier</button>
+                            <button @click="removeQtyItemCart(item)">-</button>
+                            <button @click="addQtyItemCart(item)">+</button> &nbsp;
+                            <button class="btn btn-info" @click="removeProductCart(item)">Supprimer du panier</button>
                         </td>
                     </tr>
                 </tbody>
@@ -37,9 +34,26 @@
             <div>
                 Prix total: {{ calcTotal }} €
             </div>
-            <button @click="deleteCart()">Supprimer le panier</button>
             
-            <button @click="checkout()" v-if="isLogged">Passer la commande</button>
+            <div v-if="this.deliveryStatus" class="form-check">
+                <div class="delivery__form">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <img src="https://www.dpd.com/lu/wp-content/themes/DPD_NoLogin/images/DPD_logo_redgrad_rgb_responsive.svg" alt="" class="img">
+                    <h5>Livraison a domicile (environ 48h)</h5>
+                    <p><b>4,90€ TTC</b></p>
+                </div>
+               
+                <p> Prix total avec frais de port: <b>{{ calcTotal + 4.90 }} €</b></p>
+                
+                <button @click="checkout()" v-if="isLogged" class="btn btn-primary">Passer la commande</button>
+
+            </div>
+            <div v-else>
+                <button @click="deleteCart()" class="btn btn-warning">Supprimer le panier</button> &nbsp;
+                <button @click="delivery()" class="btn btn-primary">Suivant</button>
+            </div>
+            <br>
+            
         </div>
         <div v-else>
             <h5>Votre panier est vide</h5>
@@ -70,7 +84,8 @@
                 isLogged: false,
                 status: "",
                 user: "",
-                products: []
+                products: [],
+                deliveryStatus: false
             }
         },
         created() {
@@ -114,7 +129,7 @@
                         "Content-type":"application/json"
                     },
                     body:JSON.stringify({
-                        amount: this.calcTotal * 100
+                        amount: (this.calcTotal + 4.90 ) * 100
                     })
                 });
                 const session = await response.json();
@@ -135,13 +150,20 @@
                     }
                 })
                 .catch(err => console.log(err));
+            },
+            delivery: function() {
+                if(this.deliveryStatus == false) {
+                    this.deliveryStatus = true;
+                } else {
+                    this.deliveryStatus = false;
+                }
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    table {
-        margin: auto;
+    .img {
+        width: 10em;
     }
 </style>
