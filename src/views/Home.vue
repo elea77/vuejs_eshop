@@ -1,8 +1,9 @@
 <template>
+
   <div class="home">
+
     <TitlePage title="Homepage"/>
 
- 
   </div>
 </template>
 
@@ -26,5 +27,8 @@
 </script>
 
 <style scoped>
-  
+
+
+
+
 </style>
