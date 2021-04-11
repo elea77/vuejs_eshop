@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <TitlePage title="Page d'inscription"/>
+        <TitlePage title="Ajouter un produit"/>
         <div class="form">
             <form>
                 <div class="form-row">
@@ -19,7 +19,7 @@
                 </div>
                 <img :src="img" :alt="title" width="20%"> <br>
                 
-                <button type="submit" class="btn btn-primary" @click="addProduct">Ajouter le produit</button>
+                <button type="submit" class="btn btn-primary m-3" @click="addProduct">Ajouter le produit</button>
 
             </form>
             <p v-if="messageError">{{ messageError }} </p>

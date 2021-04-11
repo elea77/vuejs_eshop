@@ -21,8 +21,8 @@
                             {{ item.price * item.qty }} €
                         </td>
                         <td>
-                            <button @click="removeQtyItemCart(item)">-</button>
-                            <button @click="addQtyItemCart(item)">+</button> &nbsp;
+                            <button class="btn" @click="removeQtyItemCart(item)">-</button> &nbsp;
+                            <button class="btn" @click="addQtyItemCart(item)">+</button> &nbsp;
                             <button class="btn btn-info" @click="removeProductCart(item)">Supprimer du panier</button>
                         </td>
                     </tr>

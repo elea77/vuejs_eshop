@@ -19,7 +19,7 @@
                 </div>
                 <img :src="img" :alt="title" width="20%"> <br>
                 
-                <button type="submit" class="btn btn-primary" @click="edit">Modifier le produit</button>
+                <button type="submit" class="btn btn-primary m-3" @click="edit">Modifier le produit</button>
 
             </form>
             <p v-if="messageError">{{ messageError }} </p>

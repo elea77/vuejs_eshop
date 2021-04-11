@@ -1,8 +1,8 @@
 <template>
-  <div class="page__shop">
-    <TitlePage title="Mon Eshop" />
-    <div class="search__form">
-      <input type="text" v-model="searchValue">
+  <div class="page__shop container">
+    <TitlePage title="Boutique" />
+    <div class="search__form form-group">
+      <input type="text" class="form-control search__input" placeholder="Rechercher un produit" v-model="searchValue">
       <!-- <input type="text" v-model="searchValue" @keyup="search"> -->
     </div>
     <div class="search__content">
@@ -45,4 +45,9 @@
   };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .search__input {
+    width: 30%;
+    margin: auto;
+  }
+</style>

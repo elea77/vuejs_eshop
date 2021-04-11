@@ -1,6 +1,5 @@
 export default {
     methods: {
-        
         addToWL(product) {
 
             let whitelist = JSON.parse(localStorage.getItem('whitelist')) || [];
@@ -35,7 +34,11 @@ export default {
             const filteredWL = whitelist.filter((item) => {
                 return item.id !== product.id;
             });
-            localStorage.setItem('whitelist', JSON.stringify(filteredWL));
+            const updateWL = localStorage.setItem('whitelist', JSON.stringify(filteredWL));
+        
+            if(updateWL == undefined) {
+                this.clearWL();
+            }
         },
         clearWL() {
             localStorage.removeItem('whitelist');

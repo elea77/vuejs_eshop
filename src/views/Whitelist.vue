@@ -1,29 +1,34 @@
 <template>
-    <div class="whitelist">
+    <div class="whitelist container">
         <TitlePage title="Liste de souhaits"/>
         <div v-if="listArray">
 
-        <table>
-            <thead>
+        <table class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <th>Titre</th>
-                    <th>Image</th>
-                    <th></th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in listArray" v-bind:key="item._id">
-                    <td>{{item.title}}</td>
-                    <td><img :src="item.img" :alt="item.title" width="50px"></td>
-
+                <tr v-for="item in listArray" v-bind:key="item.id">
                     <td>
-                        <button @click="removeProductWL(item)">Supprimer de la liste</button>
+                        <router-link :to="{name:'Product',params:{id:item.id}}">
+                            {{item.title}}
+                        </router-link> 
                     </td>
+                    <td>
+                        <router-link :to="{name:'Product',params:{id:item.id}}">
+                            <img :src="item.img" :alt="item.title" width="50px">
+                        </router-link> 
+                    </td>
+                    <td><button class="btn btn-info" @click="removeProductWL(item)">Supprimer de la liste</button></td>
                 </tr>
             </tbody>
         </table> 
-
-        <button @click="deleteCart()">Supprimer la liste de souhait</button>
+        <br>
+        <button class="btn btn-warning" @click="deleteCart()">Supprimer la liste de souhaits</button>
         </div>
         <div v-else>
             <h5>Votre liste est vide</h5>
@@ -66,7 +71,6 @@
 </script>
 
 <style lang="scss" scoped>
-    table {
-        margin: auto;
-    }
+    
+
 </style>

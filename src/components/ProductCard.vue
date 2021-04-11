@@ -1,20 +1,27 @@
 <template>
-    <div class="product__card">  
+    <div class="product__card col-4"> 
         <router-link :to="{name:'Product',params:{id:productObject._id}}">
-            <h2>
+            <img :src="productObject.img" :alt="productObject.title">
+            <h5>
                 {{productObject.title}}
-            </h2>
+            </h5>
         </router-link>
         <p>            
-            {{productObject.price}}
+            {{productObject.price}} €
         </p>
-        <p>
-            <button @click="addItemToCart(productObject)">Ajouter au panier</button>
-
-            <button @click="addItemToWL(productObject)"><i class="far fa-star"></i></button>
-        </p>
+        <button @click="addItemToCart(productObject)" class="btn btn-primary">Ajouter au panier</button>
         
-
+        <div v-for="product in this.whitelistArray" :key="product.id">
+            <div v-if="product.id == productObject._id">
+                <button @click="removeItemToWL(productObject)" class="no-btn"><i class="fas fa-star"></i></button>
+            </div>
+            <div v-else-if="product.id != productObject._id">
+                <button @click="addItemToWL(productObject)" class="no-btn"><i class="far fa-star"></i></button>
+            </div>
+        </div>
+        <div v-if="!this.whitelistArray">
+            <button @click="addItemToWL(productObject)" class="no-btn"><i class="far fa-star"></i></button>
+        </div>
     </div>
 </template>
 
@@ -42,10 +49,14 @@
         methods: {
             addItemToCart: function(product) {
                 this.addToCart(product);
-                console.log(product);
             },
             addItemToWL: function(product) {
                 this.addToWL(product);
+                window.location.reload();
+            },
+            removeItemToWL: function(product) {
+                this.removeItemWL(product);
+                window.location.reload();
             }
         }
     }
@@ -56,7 +67,11 @@
 
     .product__card {
         img {
-            width: 50%;
+            height: 15em;
+        }
+        .no-btn {
+            background: transparent;
+            border: none;
         }
     }
 </style>
