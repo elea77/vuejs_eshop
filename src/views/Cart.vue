@@ -36,6 +36,8 @@
             </div>
             
             <div v-if="this.deliveryStatus" class="form-check">
+                <button @click="delivery()" class="btn btn-primary">Précédent</button>
+
                 <div class="delivery__form">
                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                     <img src="https://www.dpd.com/lu/wp-content/themes/DPD_NoLogin/images/DPD_logo_redgrad_rgb_responsive.svg" alt="" class="img">
