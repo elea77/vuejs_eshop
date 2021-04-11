@@ -51,6 +51,7 @@
 <script>
     import Cart from '../mixins/Cart'
     import ApiUsers from '../mixins/ApiUsers'
+    import ApiOrders from '../mixins/ApiOrders'
     import TitlePage from "../components/TitlePage";
     import { loadStripe } from '@stripe/stripe-js';
     import apiConfigs from "../configs/api.configs";
@@ -62,7 +63,7 @@
         components: {
             TitlePage
         },
-        mixins: [Cart, ApiUsers],
+        mixins: [Cart, ApiUsers, ApiOrders],
         data: function() {
             return {
                 cartArray: [],
@@ -127,24 +128,7 @@
                 
             },
             order: function() {
-                const token = localStorage.getItem('token');
-                const decodedToken = VueJwtDecode.decode(token);
-
-                this.cartArray.forEach(item => {
-                    this.products.push(item.id)
-                });
-
-                return fetch(`${apiConfigs.apiUrl}/orders`, {
-                    method: "POST",
-                    headers: {"Content-Type":"Application/json"},
-                    body: JSON.stringify( {
-                        total: this.calcTotal,
-                        status: "En cours",
-                        user: decodedToken.id,
-                        products: this.products
-                    })
-                })
-                .then (res => res.json())
+                this.createOrder()
                 .then((data) => {
                     if(data.error) {
                         console.log(data.error);

@@ -1,5 +1,5 @@
 import apiConfigs from "../configs/api.configs";
-
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
     methods: {
@@ -27,22 +27,25 @@ export default {
             const token = localStorage.getItem('token');
             const decodedToken = VueJwtDecode.decode(token);
 
+            const date = new Date();
+            const orderDate = date.toLocaleDateString(['fr-FR'], {month: 'long', day: '2-digit', year: 'numeric'}); 
+
             this.cartArray.forEach(item => {
                 this.products.push(item.id)
             });
 
             return fetch(`${apiConfigs.apiUrl}/orders`, {
-            method: "POST",
-            headers: {"Content-Type":"Application/json"},
-            body: JSON.stringify( {
-                total: this.calcTotal,
-                status: "En cours",
-                user: decodedToken.id,
-                products: this.products
+                method: "POST",
+                headers: {"Content-Type":"Application/json"},
+                body: JSON.stringify( {
+                    total: this.calcTotal,
+                    status: "En cours",
+                    date: orderDate,
+                    user: decodedToken.id,
+                    products: this.products
+                })
             })
-        })
-        .then (res => res.json())
-
+            .then (res => res.json())
         }
     }
 } 

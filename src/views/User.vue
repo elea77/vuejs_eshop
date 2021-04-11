@@ -17,7 +17,7 @@
                     <h4>Mes commandes</h4>
                     <div v-for="order in this.ordersArray" v-bind:key="order._id">
                         
-                        <p><b>8 avril 2021</b> | {{ order.status }} | {{ order.total }} €</p>
+                        <p><b>{{ order.date }}</b> | {{ order.status }} | {{ order.total }} €</p>
                         
                     </div>
                 </div>
@@ -64,18 +64,13 @@
                     this.orders = this.user.orders;
                     
                     this.orders.forEach(id => {
-                        console.log("id", id);
 
                         this.getOrder(id)
                         .then(data=>{
                             this.ordersArray.push(data)
                         })
                         .catch(err => console.log(err))
-                    });
-                    
-                    // console.log("orders", this.orders);
-
-                    
+                    }); 
                 })
                 .catch(err => console.log(err))
             }
