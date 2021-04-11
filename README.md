@@ -1,8 +1,8 @@
 # Vue.js project Eshop
 
 ## Informations
-* [ Eléa Carton ]
-* [ https://vuejs-eshop.herokuapp.com/#/ ]
+* Eléa Carton
+* https://vuejs-eshop.herokuapp.com/#/
 
 ## Project setup
 ```
