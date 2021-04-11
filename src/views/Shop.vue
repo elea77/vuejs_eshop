@@ -1,14 +1,12 @@
 <template>
-  <div class="page__shop container">
+  <div class="page__shop container mb-5">
     <TitlePage title="Boutique" />
     <div class="search__form form-group">
       <input type="text" class="form-control search__input" placeholder="Rechercher un produit" v-model="searchValue">
-      <!-- <input type="text" v-model="searchValue" @keyup="search"> -->
     </div>
     <div class="search__content">
       <ProductsGrid :productsArray="filteredShop" />
     </div>
-    <!-- <ProductsGrid :productsArray="productsFromApi" /> -->
   </div>
 </template>
 
@@ -46,8 +44,11 @@
 </script>
 
 <style lang="scss" scoped>
-  .search__input {
-    width: 30%;
-    margin: auto;
+  .page__shop {
+    .search__input {
+      width: 30%;
+      margin: auto;
+    }
   }
+ 
 </style>

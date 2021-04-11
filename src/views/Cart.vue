@@ -1,5 +1,5 @@
 <template>
-    <div class="shopping__cart container">
+    <div class="shopping__cart container mb-5">
         <TitlePage title="Panier"/>
         <div v-if="cartArray">
             <table class="table">
@@ -28,11 +28,9 @@
                     </tr>
                 </tbody>
             </table> <br><br>
-            <div>
-                Quantité totale: {{ calcQty }}
-            </div>
-            <div>
-                Prix total: {{ calcTotal }} €
+            <div class="mb-5">
+                <h6>Quantité totale: {{ calcQty }}</h6>
+                <h6>Prix total: {{ calcTotal }} €</h6>
             </div>
             
             <div v-if="this.deliveryStatus" class="form-check">
@@ -52,7 +50,8 @@
             </div>
             <div v-else>
                 <button @click="deleteCart()" class="btn btn-warning">Supprimer le panier</button> &nbsp;
-                <button @click="delivery()" class="btn btn-primary">Suivant</button>
+                <button @click="delivery()" v-if="isLogged" class="btn btn-primary">Suivant</button>
+                <p v-else>Vous devez vous connecter pour passer une commande</p>
             </div>
             <br>
             

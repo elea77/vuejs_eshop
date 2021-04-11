@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-5">
     <TitlePage title="Liste des produits" />
     <table class="table">
         <thead class="thead-dark">

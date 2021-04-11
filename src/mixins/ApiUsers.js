@@ -5,8 +5,13 @@ import VueJwtDecode from "vue-jwt-decode";
 export default {
     methods: {
         getUsers() {
-            console.log(apiConfigs.apiUrl);
-            return fetch(`${apiConfigs.apiUrl}/users`)
+            const token = localStorage.getItem('token');
+            return fetch(`${apiConfigs.apiUrl}/users`, {
+                method: "GET",
+                headers: {
+                    Authorization: token
+                }
+            })
             .then(res=>res.json())
         },
         getUser() {

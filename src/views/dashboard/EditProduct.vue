@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mb-5">
         <TitlePage title="Modification d'un produit"/>
         <div class="form">
             <form>
@@ -19,6 +19,10 @@
                 </div>
                 <img :src="img" :alt="title" width="20%"> <br>
                 
+                <select class="form-control" v-model="category">
+                    <option v-for="category in categories" v-bind:key="category._id" :value="category._id">{{ category.title }}</option>
+                </select>
+
                 <button type="submit" class="btn btn-primary m-3" @click="edit">Modifier le produit</button>
 
             </form>
@@ -30,6 +34,7 @@
 <script>
     import TitlePage from '../../components/TitlePage'; 
     import ApiProducts from '../../mixins/ApiProducts';
+    import ApiCategories from '../../mixins/ApiCategories';
     
     export default {
         components: {
@@ -41,10 +46,12 @@
                 description: "",
                 price: "",
                 img: "",
-                messageError: ""
+                messageError: "",
+                category: "",
+                categories: {}
             }
         },
-        mixins:[ApiProducts],
+        mixins:[ApiProducts, ApiCategories],
         methods: {
             edit: function(event) {
                 event.preventDefault(); // empêche le rechargement de la page
@@ -69,7 +76,13 @@
                     this.description = data.description;
                     this.img = data.img;
             })
-            .catch((err) => console.log(err)); 
+            .catch((err) => console.log(err))
+
+            this.getCategories()
+            .then((data) => {
+                this.categories = data;
+            })
+            .catch(err => console.log(err))
         },
     }
 </script>

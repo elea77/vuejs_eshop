@@ -1,5 +1,5 @@
 <template>
-    <div class="whitelist container">
+    <div class="whitelist container mb-5">
         <TitlePage title="Liste de souhaits"/>
         <div v-if="listArray">
 

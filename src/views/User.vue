@@ -1,24 +1,21 @@
 <template>
-    <div>
+    <div class="container mb-5">
         <TitlePage title="Mon compte"/>
         <div v-if="isLogged">
             <div class="user__info row" v-if="user">
                 <div class="col-6">
-                    <h4>Mes informations personnelles</h4>
+                    <h4>Mes informations personnelles</h4><br>
                     <p>Nom : {{user.firstName}}</p>
                     <p>Prénom : {{user.lastName}}</p>
                     <p>Email : {{user.email}}</p>
                     <p>Téléphone : {{user.phone}}</p>
                     <p>Adresse : {{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</p>
                     <router-link to="/edit_profile">Modifier le profil</router-link> 
-                    <!-- | <router-link to="/edit_password">Modifier le mot de passe</router-link> -->
                 </div>
                 <div class="col-6">
-                    <h4>Mes commandes</h4>
+                    <h4>Mes commandes</h4><br>
                     <div v-for="order in this.ordersArray" v-bind:key="order._id">
-                        
                         <p><b>{{ order.date }}</b> | {{ order.status }} | {{ order.total }} €</p>
-                        
                     </div>
                 </div>
                 

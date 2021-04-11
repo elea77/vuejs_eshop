@@ -4,7 +4,13 @@ import VueJwtDecode from "vue-jwt-decode";
 export default {
     methods: {
         getOrders() {
-            return fetch(`${apiConfigs.apiUrl}/orders`)
+            const token = localStorage.getItem('token');
+            return fetch(`${apiConfigs.apiUrl}/orders`,{
+                method: "GET",
+                headers: {
+                    Authorization: token
+                }
+            })
             .then(res=>res.json())
         },
         getOrder(id) {
@@ -12,9 +18,11 @@ export default {
             .then(res => res.json())
         },
         editOrder(id) {
+            const token = localStorage.getItem('token');
             return fetch(`${apiConfigs.apiUrl}/orders/${id}`, {
                 method: "PUT",
                 headers: {
+                    Authorization: token,
                     "Content-Type":"Application/json"
                 },
                 body: JSON.stringify( {

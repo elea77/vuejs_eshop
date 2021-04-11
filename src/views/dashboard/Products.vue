@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-5">
     <TitlePage title="Liste des produits" />
     <router-link to="/backoffice/add/product">
       <button class="btn btn-primary mb-2">Ajouter un produit</button>
@@ -39,6 +39,7 @@
   import TitlePage from '../../components/TitlePage';
   import ProductsGrid from '../../components/ProductsGrid';
   import ApiProducts from '../../mixins/ApiProducts';
+  import ApiCategories from '../../mixins/ApiCategories';
 
   export default {
     components: {
@@ -51,7 +52,7 @@
         searchValue: ""
       };
     },
-    mixins:[ApiProducts],
+    mixins:[ApiProducts, ApiCategories],
     methods: {
       del: function(id) {
         console.log(id);

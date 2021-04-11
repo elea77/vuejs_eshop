@@ -22,7 +22,7 @@ export default {
   footer{
     background-color: #242424;
     color: #fff;
-    position: relative;
+    position: fixed;
     width: 100%;
     bottom: 0%;
     p {

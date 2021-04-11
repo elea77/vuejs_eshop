@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mb-5">
     <TitlePage title="Liste utilisateurs" />
     <router-link to="/backoffice/add/admin">
       <button class="btn btn-primary mb-2">Ajouter un Administrateur</button>

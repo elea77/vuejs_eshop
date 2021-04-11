@@ -12,6 +12,7 @@ import EditPassword from '../views/EditPassword.vue'
 import BOUsers from '../views/dashboard/Users.vue'
 import BOProducts from '../views/dashboard/Products.vue'
 import BOOrders from '../views/dashboard/Orders.vue'
+import BOCategories from '../views/dashboard/Categories.vue'
 import Dashboard from '../views/dashboard/Dashboard.vue'
 import AddAdmin from '../views/dashboard/AddAdmin.vue'
 import AddProduct from '../views/dashboard/AddProduct.vue'
@@ -102,6 +103,11 @@ const routes = [
     path: '/backoffice/products',
     name: 'BOProducts',
     component: BOProducts
+  },
+  {
+    path: '/backoffice/categories',
+    name: 'BOCategories',
+    component: BOCategories
   },
   {
     path: '/backoffice',

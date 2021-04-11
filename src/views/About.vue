@@ -1,19 +1,16 @@
 <template>
   <div class="about">
-    <TitlePage title="About"/>
-    <Button btnText="Clique sur moi"/>
+    <TitlePage title="A propos de nous"/>
+    <p>Ce site a été créé a l'occasion d'un projet réalisé à Ynov.</p>
   </div>
 </template>
 
 <script>
   import TitlePage from "../components/TitlePage";
-  import Button from "../components/Button";
-
   export default {
     name: "About",
     components: {
-      TitlePage,
-      Button
+      TitlePage
     }
   }
 </script>

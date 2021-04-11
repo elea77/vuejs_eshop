@@ -1,8 +1,8 @@
 <template>
-    <div class="product__card col-4"> 
+    <div class="product__card col-4 mb-4"> 
         <router-link :to="{name:'Product',params:{id:productObject._id}}">
             <img :src="productObject.img" :alt="productObject.title">
-            <h5>
+            <h5 class="product__title">
                 {{productObject.title}}
             </h5>
         </router-link>
@@ -68,6 +68,10 @@
     .product__card {
         img {
             height: 15em;
+        }
+        .product__title {
+            color: black;
+            padding: 0.25em;
         }
         .no-btn {
             background: transparent;

@@ -116,7 +116,6 @@ import ApiUsers from '../mixins/ApiUsers';
 </script>
 
 <style lang="scss" scoped>
-
     .header__main {
         display: flex;
         align-items: center;
