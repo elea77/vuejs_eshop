@@ -56,7 +56,6 @@
     import { loadStripe } from '@stripe/stripe-js';
     import apiConfigs from "../configs/api.configs";
     const stripePromise = loadStripe('pk_test_51IYAwmJ5UFJGtqNY47wrtVEcNKKVkbiO0TzfR5kQ9Sfle8LjCPvQXzhuWH7PKoRaWQNP3oC2mVBhHPqkUn3n4BId00YcpQNq2k');
-    import VueJwtDecode from "vue-jwt-decode";
 
 
     export default {

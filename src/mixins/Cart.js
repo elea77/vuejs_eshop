@@ -40,10 +40,13 @@ export default {
             const filteredCart = cart.filter((item) => {
                 return item.id !== product.id;
             });
-            localStorage.setItem('cart', JSON.stringify(filteredCart));
+            const updateCart = localStorage.setItem('cart', JSON.stringify(filteredCart));
+        
+            if(updateCart == undefined) {
+                this.clearCart();
+            }
         },
         clearCart() {
-            //localStorage.removeItem('cart');
             localStorage.removeItem('cart');
         },
         removeOneQty(product) {

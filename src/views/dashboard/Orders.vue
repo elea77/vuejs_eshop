@@ -5,7 +5,7 @@
         <thead class="thead-dark">
             <tr>
             <th scope="col">Nom</th>
-            <!-- <th scope="col">Date</th> -->
+            <th scope="col">Date</th>
             <th scope="col">Facturation</th>
             <th scope="col">Etat</th>
             <th scope="col">Total</th>
@@ -15,7 +15,7 @@
             <tbody>
                 <tr v-for="order in ordersFromApi.data" v-bind:key="order._id">
                     <td>{{ order.user.firstName }} {{ order.user.lastName }}</td>
-                    <!-- <td>{{ order.date }}</td> -->
+                    <td>{{ order.date }}</td>
                     <td>{{ order.user.address.street }}, {{ order.user.address.city }} {{ order.user.address.zip }}, {{ order.user.address.country }}</td>
                     <td v-if="editStatus">
                         <select class="form-control" @change="changeStatus(order.status, order._id)" v-model="order.status">
