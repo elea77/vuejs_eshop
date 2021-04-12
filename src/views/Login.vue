@@ -73,7 +73,7 @@
 <style lang="scss" scoped>
     .form {
         .form_input {
-            width: 40%;
+            width: 25em;
             height: calc(1.5em + .75rem + 2px);
             padding: .375rem .75rem;
             font-size: 1rem;
@@ -85,6 +85,9 @@
             border: 1px solid #ced4da;
             border-radius: .25rem;
             margin-bottom: 1rem;
+            @media (max-width: 560px) {
+                width: 18em;
+            }
         }
         .btn {
             display: inline-block;
