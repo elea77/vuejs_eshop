@@ -1,5 +1,5 @@
 <template>
-    <div class="product__card col-4 mb-4"> 
+    <div class="product__card col-lg-4 mb-4 col-md-4 col-sm-6 col-xs-12"> 
         <router-link :to="{name:'Product',params:{id:productObject._id}}">
             <img :src="productObject.img" :alt="productObject.title">
             <h5 class="product__title">

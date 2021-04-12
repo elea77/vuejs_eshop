@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="container">
+        <div class="alert alert-danger" role="alert" v-if="messageError">
+            {{ messageError }} 
+        </div>
         <TitlePage title="Page de connexion"/>
         <div class="form">
             <!-- Autre méthode:  -->
@@ -15,7 +18,6 @@
                     <button type="submit" class="btn" @click.prevent="loginBtn">Se connecter</button>
                 </div>
             </form>
-            <p v-if="messageError">{{ messageError }} </p>
         </div>
     </div>
 </template>

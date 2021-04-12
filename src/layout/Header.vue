@@ -123,6 +123,9 @@ import ApiUsers from '../mixins/ApiUsers';
         background-color: #242424;
         height: 70px;
         .header__logo {
+            @media (max-width: 1000px) {
+                display: none;
+            }
             h1 {
                 color: white;
             }
@@ -131,37 +134,43 @@ import ApiUsers from '../mixins/ApiUsers';
                 width: 4em;
             }
         }
-        .header__nav {
-            .nav__list {
-                display: flex;
-                list-style: none;
-                margin: 0;
-                height: 100%;
-                .nav__item {
-                    color: white;
-                    &:hover{
-                        color: #ffffff;
-                        border-bottom: 4px solid #fff;
-                        transition: all 0.2s ease-out;
-                    }
-                    a, button {
+        .nav-list-container {
+            @media (max-width: 1000px) {
+                display: none;
+            }
+            .header__nav {
+                .nav__list {
+                    display: flex;
+                    list-style: none;
+                    margin: 0;
+                    height: 100%;
+                    .nav__item {
                         color: white;
-                        padding: 0px 25px;
-                        height: 100%;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        text-decoration: none;
-                        font-size: 1.2em;
-                        // font-size: 1.5em;
-                    }
-                    button {
-                        background: transparent;
-                        border: none !important;
+                        &:hover{
+                            color: #ffffff;
+                            border-bottom: 4px solid #fff;
+                            transition: all 0.2s ease-out;
+                        }
+                        a, button {
+                            color: white;
+                            padding: 0px 25px;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-decoration: none;
+                            font-size: 1.2em;
+                            // font-size: 1.5em;
+                        }
+                        button {
+                            background: transparent;
+                            border: none !important;
+                        }
                     }
                 }
             }
         }
+        
     }
 
     .responsive__menu {

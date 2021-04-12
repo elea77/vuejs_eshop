@@ -46,7 +46,7 @@
 <style lang="scss" scoped>
   .page__shop {
     .search__input {
-      width: 30%;
+      width: 12em;
       margin: auto;
     }
   }
