@@ -8,7 +8,6 @@ import Product from '../views/Product.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import EditUser from '../views/EditUser.vue'
-import EditPassword from '../views/EditPassword.vue'
 import BOUsers from '../views/dashboard/Users.vue'
 import BOProducts from '../views/dashboard/Products.vue'
 import BOOrders from '../views/dashboard/Orders.vue'
@@ -83,11 +82,6 @@ const routes = [
     path: '/edit_profile',
     name: 'EditUser',
     component: EditUser
-  },
-  {
-    path: '/edit_password',
-    name: 'EditPassword',
-    component: EditPassword
   },
   {
     path: '/backoffice/users',
