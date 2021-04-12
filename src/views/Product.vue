@@ -4,10 +4,10 @@
       <TitlePage :title="productItem.title"/>
 
       <div class="row">
-        <div class="col">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-3">
             <img :src="productItem.img" :alt="productItem.title" class="product__img">
         </div>
-        <div class="col product__info">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 product__info">
             <h4>Description du produit</h4>
             <p>{{productItem.description}}</p>
             <p>Prix: {{productItem.price}} €</p>
@@ -82,6 +82,9 @@ export default {
         }
         .product__info {
           text-align: left;
+          @media (max-width: 768px) {
+            text-align: center;
+          }
           p {
             font-size: 1.2em;
           }
