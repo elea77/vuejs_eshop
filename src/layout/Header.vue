@@ -48,6 +48,9 @@
             <nav>    
                 <ul>
                     <li>
+                        <router-link to="/">Page d'accueil</router-link>
+                    </li>
+                    <li>
                         <router-link to="/shop">Boutique</router-link>
                     </li>
                     <li>
@@ -122,6 +125,11 @@ import ApiUsers from '../mixins/ApiUsers';
         justify-content: space-around;
         background-color: #242424;
         height: 70px;
+        @media (max-width: 1000px) {
+            align-items: unset;
+            justify-content: unset;
+            background-color: none;
+        }
         .header__logo {
             @media (max-width: 1000px) {
                 display: none;
@@ -160,7 +168,6 @@ import ApiUsers from '../mixins/ApiUsers';
                             align-items: center;
                             text-decoration: none;
                             font-size: 1.2em;
-                            // font-size: 1.5em;
                         }
                         button {
                             background: transparent;
@@ -250,16 +257,16 @@ import ApiUsers from '../mixins/ApiUsers';
             // overflow: hidden;
             > ul {
                 text-align: center;
-                position: absolute;
-                top: 35%;
-                left: 20%;
-                right: 20%;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                padding-left: 0;
                 list-style: none;
                 > li {
                     opacity: 0;
                     transition: .5s;
                     transition-delay: 0s;
-                    > a {
+                    > a, > button {
                         text-decoration: none;
                         text-transform: uppercase;
                         color: black;
@@ -267,6 +274,9 @@ import ApiUsers from '../mixins/ApiUsers';
                         font-family: sans-serif;
                         display: block;
                         padding: 30px;
+                        background: transparent;
+                        border: none !important;
+                        margin: auto;
                     }
                 }
             }

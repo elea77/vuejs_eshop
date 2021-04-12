@@ -2,15 +2,15 @@
     <div class="container mb-5">
         <TitlePage title="Mon compte"/>
         <div v-if="isLogged">
-            <div class="user__info row" v-if="user">
+            <div class="user__account row" v-if="user">
                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12 mb-5">
                     <h4>Mes informations personnelles</h4><br>
-                    <p>Nom : {{user.firstName}}</p>
-                    <p>Prénom : {{user.lastName}}</p>
-                    <p>Email : {{user.email}}</p>
-                    <p>Téléphone : {{user.phone}}</p>
-                    <p>Adresse : {{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</p>
-                    <router-link to="/edit_profile">Modifier le profil</router-link> 
+                    <p>Nom : <b>{{user.firstName}}</b></p>
+                    <p>Prénom : <b>{{user.lastName}}</b></p>
+                    <p>Email : <b>{{user.email}}</b></p>
+                    <p>Téléphone : <b>{{user.phone}}</b></p>
+                    <p>Adresse : <b>{{user.address.street}}, {{user.address.city}} {{user.address.zip}}, {{user.address.country}}</b></p>
+                    <router-link to="/edit_profile" class="btn btn-primary">Modifier le profil</router-link> 
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
                     <h4>Mes commandes</h4><br>
@@ -76,4 +76,7 @@
 </script>
 
 <style lang="scss" scoped>
+    .user__info {
+        text-align: left;
+    }
 </style>
