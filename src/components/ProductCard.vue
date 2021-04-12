@@ -9,18 +9,14 @@
         <p>            
             {{productObject.price}} €
         </p>
-        <button @click="addItemToCart(productObject)" class="btn btn-primary">Ajouter au panier</button>
-        
-        <div v-for="product in this.whitelistArray" :key="product.id">
-            <div v-if="product.id == productObject._id">
-                <button @click="removeItemToWL(productObject)" class="no-btn"><i class="fas fa-star"></i></button>
-            </div>
-            <div v-else-if="product.id != productObject._id">
-                <button @click="addItemToWL(productObject)" class="no-btn"><i class="far fa-star"></i></button>
-            </div>
-        </div>
-        <div v-if="!this.whitelistArray">
-            <button @click="addItemToWL(productObject)" class="no-btn"><i class="far fa-star"></i></button>
+        <button @click="addItemToCart(productObject)" class="btn btn-primary">Ajouter au panier</button><br>
+        <button @click="addItemToWL(productObject)" class="no-btn">Ajouter a la liste <i class="far fa-star"></i></button>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="success">
+            Le produit a été ajouté avec succès !
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     </div>
 </template>
@@ -40,23 +36,19 @@
         data: function() {
             return {
                 whitelistArray: [],
-                whitelistExisting: false
+                whitelistExisting: false,
+                success: false
             }
-        },
-        created() {
-            this.whitelistArray = this.getWL();
         },
         methods: {
             addItemToCart: function(product) {
                 this.addToCart(product);
+                this.success = true;
             },
             addItemToWL: function(product) {
                 this.addToWL(product);
-                window.location.reload();
-            },
-            removeItemToWL: function(product) {
-                this.removeItemWL(product);
-                window.location.reload();
+                this.success = true;
+
             }
         }
     }

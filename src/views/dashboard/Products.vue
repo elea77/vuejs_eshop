@@ -11,15 +11,17 @@
             <th scope="col">Prix</th>
             <th scope="col">Description</th>
             <th scope="col">Image</th>
+            <!-- <th scope="col">Catégorie</th> -->
             <th scope="col">Actions</th>
             </tr>
         </thead>
             <tbody>
                 <tr v-for="product in productsFromApi" v-bind:key="product._id">
                     <td>{{ product.title }}</td>
-                    <td>{{ product.price }} €</td>
+                    <td><p>{{ product.price }} €</p></td>
                     <td>{{ product.description }}</td>
                     <td><img :src="product.img" :alt="product.title" width="50px"></td>
+                    <!-- <td>{{ product.categories }}</td> -->
                     <td>
                       <router-link :to="{name:'EditProduct',params:{id:product._id}}">
                         <span class="iconify" data-inline="false" data-icon="ant-design:edit-filled" style="font-size: 28px;  color: #0085FF;"></span>
@@ -49,7 +51,8 @@
     data: function() {
       return {
         productsFromApi: [],
-        searchValue: ""
+        searchValue: "",
+        categoriesArray: {}
       };
     },
     mixins:[ApiProducts, ApiCategories],
@@ -67,6 +70,23 @@
       this.getProducts()
         .then((data) => {
           this.productsFromApi = data;
+          // this.productsFromApi.forEach(id => {
+
+          //   console.log(id);
+
+          //   this.getCategory(id.categories)
+          //   .then((data) => {
+          //     console.log(data);
+          //     this.categoriesArray.push(data)
+          //   })
+          //   .catch((err) => console.log(err));
+
+          //   // this.getCategory(id)
+          //   // .then(data=>{
+          //   //   this.ordersArray.push(data)
+          //   // })
+          //   // .catch(err => console.log(err))
+          // }); 
         })
         .catch((err) => console.log(err));
     },

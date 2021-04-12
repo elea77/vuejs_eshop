@@ -18,6 +18,8 @@
                     <input type="text" class="form-control" v-model="img" placeholder="Image">
                 </div>
                 <img :src="img" :alt="title" width="20%"> <br>
+
+                <p class="category__product">Catégorie actuelle: {{ this.categ.title }} </p>
                 
                 <select class="form-control" v-model="category">
                     <option v-for="category in categories" v-bind:key="category._id" :value="category._id">{{ category.title }}</option>
@@ -48,6 +50,7 @@
                 img: "",
                 messageError: "",
                 category: "",
+                categ: "",
                 categories: {}
             }
         },
@@ -75,8 +78,20 @@
                     this.price = data.price;
                     this.description = data.description;
                     this.img = data.img;
+                    this.categ = data.categories;
+
+
+                    this.getCategory(this.categ)
+                    .then((data) => {
+                        this.categ = data;
+                        console.log(this.categ.title);
+
+                    })
+                    .catch(err => console.log(err))
             })
             .catch((err) => console.log(err))
+            
+    
 
             this.getCategories()
             .then((data) => {
@@ -122,6 +137,9 @@
             color: #fff;
             background-color: #007bff;
             border-color: #007bff;
+        }
+        .category__product {
+            text-align: left;
         }
     }
 </style>
