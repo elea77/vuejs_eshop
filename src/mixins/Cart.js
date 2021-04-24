@@ -40,11 +40,13 @@ export default {
             const filteredCart = cart.filter((item) => {
                 return item.id !== product.id;
             });
-            const updateCart = localStorage.setItem('cart', JSON.stringify(filteredCart));
-        
-            if(updateCart == undefined) {
+
+            localStorage.setItem('cart', JSON.stringify(filteredCart));
+
+            if(this.getCart() == '') {
                 this.clearCart();
             }
+
         },
         clearCart() {
             localStorage.removeItem('cart');
