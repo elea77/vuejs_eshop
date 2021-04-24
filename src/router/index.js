@@ -19,6 +19,7 @@ import EditProduct from '../views/dashboard/EditProduct.vue'
 import auth from "../middleware/auth.js";
 import Cart from "../views/Cart.vue";
 import Whitelist from "../views/Whitelist.vue";
+import VueJwtDecode from "vue-jwt-decode";
 
 Vue.use(VueRouter)
 
@@ -42,16 +43,16 @@ const routes = [
     path: '/account',
     name: 'User',
     component: User,
-    // beforeEnter(to, from, next) {
-    //   if((!localStorage.getItem('token'))) {
-    //     next();
-    //   }
-    //   else {
-    //     next({
-    //       name: "Login"
-    //     })
-    //   }
-    // }
+    beforeEnter(to, from, next) {
+      if((!localStorage.getItem('token'))) {
+        next({
+          name: "Login"
+        })
+      }
+      else {
+        next()
+      }
+    }
   },
   {
     path: '/cart',
@@ -81,47 +82,202 @@ const routes = [
   {
     path: '/edit_profile',
     name: 'EditUser',
-    component: EditUser
+    component: EditUser,
+    beforeEnter(to, from, next) {
+      if((!localStorage.getItem('token'))) {
+        next({
+          name: "Login"
+        })
+      }
+      else {
+        next()
+      }
+    }
   },
   {
     path: '/backoffice/users',
     name: 'BOUsers',
-    component: BOUsers
+    component: BOUsers,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/orders',
     name: 'BOOrders',
-    component: BOOrders
+    component: BOOrders,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/products',
     name: 'BOProducts',
-    component: BOProducts
+    component: BOProducts,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/categories',
     name: 'BOCategories',
-    component: BOCategories
+    component: BOCategories,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        // console.log(decodedToken);
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/add/admin',
     name: 'AddAdmin',
-    component: AddAdmin
+    component: AddAdmin,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/add/product',
     name: 'AddProduct',
-    component: AddProduct
+    component: AddProduct,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/backoffice/edit_product/:id',
     name: 'EditProduct',
-    component: EditProduct
+    component: EditProduct,
+    beforeEnter(to, from, next) {
+      const token = localStorage.getItem('token');
+      if(token) {
+        const decodedToken = VueJwtDecode.decode(token); 
+        if(decodedToken.isAdmin == true) {
+          next()
+        } else {
+          next({
+            name: "Home"
+          })
+        }
+      }
+      else {
+        next({
+          name: "Home"
+        })
+      }
+    }
   },
   {
     path: '/about',

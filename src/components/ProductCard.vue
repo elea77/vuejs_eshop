@@ -12,8 +12,18 @@
         <button @click="addItemToCart(productObject)" class="btn btn-primary">Ajouter au panier</button><br>
         <button @click="addItemToWL(productObject)" class="no-btn">Ajouter a la liste <i class="far fa-star"></i></button>
 
-        <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="success">
-            Le produit a été ajouté avec succès !
+        <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="successCart">
+            Le produit a été ajouté avec succès ! 
+            <router-link to="/cart">Aller au panier</router-link>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="successWL">
+            Le produit a été ajouté avec succès ! 
+            <router-link to="/whitelist">Aller à la liste de souhaits</router-link>
+
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -37,17 +47,18 @@
             return {
                 whitelistArray: [],
                 whitelistExisting: false,
-                success: false
+                successWL: false,
+                successCart: false
             }
         },
         methods: {
             addItemToCart: function(product) {
                 this.addToCart(product);
-                this.success = true;
+                this.successCart = true;
             },
             addItemToWL: function(product) {
                 this.addToWL(product);
-                this.success = true;
+                this.successWL = true;
 
             }
         }
